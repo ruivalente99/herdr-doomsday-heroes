@@ -74,7 +74,6 @@ test("one Doomsday Heroes layout, exactly two theme palettes with identical role
   assert.match(read("mods/doomsday-tabs/main.js"), /panelButton\("bomb-run", "Bomb Run"/);
   assert.match(read("mods/doomsday-tabs/main.js"), /enabled\.includes\("bomb-run"\)/, "Bomb Run button must respect the toggle");
   assert(json("mods/doomsday-tabs/mod.json").palette.some(entry => entry.command === "doomsday-tabs.toggle-bomb-run"));
-  assert.equal(read("share/doomsday/layouts/doomsday.json"), read("layouts/doomsday.json"));
   assert.deepEqual(layout.theme, { light: "vanguard", dark: "eclipse" });
   assert(layout.terminal_opacity >= 0.85 && layout.terminal_opacity < 1);
   assert(existsSync(resolve(root, layout.preview)));

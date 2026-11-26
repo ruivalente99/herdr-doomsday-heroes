@@ -77,17 +77,14 @@ function assertAssets(nodes) {
   for (const { asset } of nodes) if (asset) assert(existsSync(resolve(root, asset)), `Missing asset: ${asset}`);
 }
 
-test("shared Battle Simulator command ships the current Arena and all required sprite assets", () => {
+test("Battle Simulator command ships the current Arena and all required sprite assets", () => {
   for (const file of ["main.js", "scene.js", "choreography.js", "mod.json"]) {
-    const path = `mods/doomsday-arena/${file}`;
-    assert.equal(read(`share/doomsday/${path}`), read(path), `Stale shared Arena: ${file}`);
+    assert(existsSync(resolve(root, `mods/doomsday-arena/${file}`)), `Missing Arena file: ${file}`);
   }
   for (const folder of ["mods/doomsday-agents/sprites/doomsday", "mods/doomsday-agents/sprites/doomsday/weapons"]) {
-    for (const file of readdirSync(resolve(root, folder)).filter(name => name.endsWith(".svg"))) {
-      assert.equal(read(`share/doomsday/${folder}/${file}`), read(`${folder}/${file}`), `Stale or missing shared sprite: ${file}`);
-    }
+    assert(readdirSync(resolve(root, folder)).filter(name => name.endsWith(".svg")).length > 0, `Empty sprite folder: ${folder}`);
   }
-  const metadata = JSON.parse(read("share/doomsday/mods/doomsday-arena/mod.json"));
+  const metadata = JSON.parse(read("mods/doomsday-arena/mod.json"));
   const command = metadata.palette.find(entry => entry.title === "Doomsday Heroes: Battle Simulator");
   assert(command);
   assert.equal(command.command, "mod.open");
@@ -252,8 +249,9 @@ test("expanded battles keep the source ship and front clicks focus only their co
   assert.equal(checked.state.timers.length, 0);
 });
 
-test("mini-battle messages occupy a separate flow row below sprites in source and shared export", () => {
-  for (const path of ["mods/doomsday-agents/battle.js", "share/doomsday/mods/doomsday-agents/battle.js"]) {
+test("mini-battle messages occupy a separate flow row below sprites", () => {
+  const path = "mods/doomsday-agents/battle.js";
+  {
     for (const width of [180, 268, 360]) {
       for (const count of [2, 4, 8]) {
         const host = ui();
@@ -319,9 +317,9 @@ test("Arena current and previous dialogue have separate bubbles, portraits and m
   assertAssets(fixture.nodes);
 });
 
-test("shared mini bubbles do not attribute lines to fighters hidden on the bench", () => {
+test("mini bubbles do not attribute lines to fighters hidden on the bench", () => {
   const host = ui();
-  const battle = new Function("host", `const { div, image, h_flex, shared, settings, layout } = host;\n${source("share/doomsday/mods/doomsday-agents/battle.js")}\nreturn battleScene;`)({
+  const battle = new Function("host", `const { div, image, h_flex, shared, settings, layout } = host;\n${source("mods/doomsday-agents/battle.js")}\nreturn battleScene;`)({
     ...host, shared: () => ({}), settings: () => ({ dark: true }), layout: () => ({ id: "sidebar", size: { px: 268 } }),
   });
   const heroes = ["widow", "hawkeye", "fury", "vision", "doom", "ironman"];

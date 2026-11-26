@@ -261,7 +261,7 @@ For the implementation map, see [Architecture](docs/architecture.md).
 
 ## Herdr gallery
 
-This repository is a [Herdr community layout](https://herdr.dev/layouts): the root holds `layouts/doomsday.json`, its `mods/`, the [`RECIPE.md`](RECIPE.md) brief and `preview.png`, and the repo carries the `herdr-layout` topic. `share/doomsday/` is the same package as a self-contained folder; keep it in sync with the root (`tools/docs.test.mjs` checks it).
+This repository is a [Herdr community layout](https://herdr.dev/layouts): the root holds `layouts/doomsday.json`, its `mods/`, the [`RECIPE.md`](RECIPE.md) brief and `preview.png`, and the repo carries the `herdr-layout` topic.
 
 ## Inspiration and credits
 

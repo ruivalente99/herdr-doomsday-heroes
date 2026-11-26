@@ -46,11 +46,11 @@ test("overview is a self-contained, wide SVG with explicit illustration provenan
   }
 });
 
-test("root recipe and preview match the installable export", () => {
+test("root recipe and preview exist without a duplicate share package", () => {
   assert(read("RECIPE.md").includes("# Doomsday Heroes"));
   assert(read("RECIPE.md").includes("![Doomsday Heroes for Herdr](preview.png)"));
-  assert(readFileSync(resolve(root, "RECIPE.md")).equals(readFileSync(resolve(root, "share/doomsday/RECIPE.md"))));
-  assert(readFileSync(resolve(root, "preview.png")).equals(readFileSync(resolve(root, "share/doomsday/preview.png"))));
+  assert(existsSync(resolve(root, "preview.png")));
+  assert(!existsSync(resolve(root, "share")));
 });
 
 test("installer backs up only matching files, validates mods and installs the layout", () => {
