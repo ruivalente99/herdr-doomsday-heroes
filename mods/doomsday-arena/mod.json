@@ -1,0 +1,13 @@
+{
+  "place": "none",
+  "title": "Doomsday Heroes · Arena",
+  "overlay": { "kind": "dialog", "width": 704, "height": 560 },
+  "palette": [
+    {
+      "title": "Doomsday Heroes: Battle Simulator",
+      "command": "mod.open",
+      "args": { "name": "doomsday-arena" },
+      "words": "arena demo battle combat energy blades pulse pistols custom squads conversations"
+    }
+  ]
+}

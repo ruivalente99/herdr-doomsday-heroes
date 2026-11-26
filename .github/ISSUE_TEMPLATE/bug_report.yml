@@ -1,0 +1,36 @@
+name: Bug report
+description: Report a problem with the Doomsday Heroes Herdr layout or mods.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Before reporting, check that the issue reproduces with the latest project files.
+  - type: input
+    id: herdr-version
+    attributes:
+      label: Herdr version
+      placeholder: e.g. 0.x
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Operating system
+      placeholder: macOS, Linux, or Windows (include version if known)
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Include the steps to reproduce and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Add relevant output from `herdr-app check` or a screenshot.
+    validations:
+      required: false
