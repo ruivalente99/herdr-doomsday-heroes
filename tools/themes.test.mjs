@@ -115,24 +115,24 @@ test("all ship backgrounds have both appearances; unknown ships have no path", (
   assert.equal(shipBackground("missing"), null);
 });
 
-test("character roster has all generated sprites and only Husk drones repeat", () => {
-  const heroes = ["meridian", "vesper", "rook", "basalt", "husk", "cog", "aldric", "pip",
-    "kestrel", "juno", "vale", "nyx", "hexa", "morrow", "umbra"];
+test("character roster has all generated sprites and only Doombots repeat", () => {
+  const heroes = ["ironman", "cap", "thor", "hulk", "widow", "hawkeye", "spiderman", "strange",
+    "wanda", "panther", "vision", "loki", "fury", "doombot", "doom"];
   assert.equal(heroes.length, 15);
   for (const hero of heroes) {
     assert(existsSync(resolve(root, `mods/doomsday-agents/sprites/doomsday/${hero}.svg`)), hero);
   }
 
-  const pool = ["meridian", "vesper", "husk"];
+  const pool = ["ironman", "cap", "doombot"];
   const roster = [];
   for (let i = 0; i < pool.length + 4; i++) roster.push(pickHero(pool, roster, () => 0.5));
   const repeats = roster.filter((hero, index) => roster.indexOf(hero) !== index);
   assert(repeats.length > 0);
-  assert(repeats.every(hero => hero === "husk"));
+  assert(repeats.every(hero => hero === "doombot"));
 
-  const saved = { first: "meridian", duplicate: "meridian", trooperA: "husk", trooperB: "husk", removed: "umbra" };
+  const saved = { first: "ironman", duplicate: "ironman", botA: "doombot", botB: "doombot", removed: "doom" };
   assert(repairCast(pool, saved));
-  assert.deepEqual(saved, { first: "meridian", trooperA: "husk", trooperB: "husk" });
+  assert.deepEqual(saved, { first: "ironman", botA: "doombot", botB: "doombot" });
 });
 
 test("character artwork preserves the transparent pixel grid and display size", () => {
@@ -200,15 +200,15 @@ test("mini battles use their own ship and palette, not the active space's backdr
       ...host, shared: () => ({ active: "skyrunner", other: "nightglass" }),
       settings: () => ({ dark: index === 1 }), layout: () => ({ id: "sidebar", size: { px: 360 } }),
     });
-    battle("other", [{ address: "a" }, { address: "b" }], { a: "meridian", b: "umbra" }, nativeTheme(palette));
+    battle("other", [{ address: "a" }, { address: "b" }], { a: "ironman", b: "doom" }, nativeTheme(palette));
     assert(host.nodes.some(n => n.asset === `backgrounds/ships/${sides[index]}/nightglass.png`));
-    assert(host.nodes.some(n => n.calls.some(c => c[0] === "child" && c[1] === "Kneel, Captain. The last day has already begun.")));
+    assert(host.nodes.some(n => n.calls.some(c => c[0] === "child" && c[1] === "A tin suit against Latveria's sovereign? How quaint.")));
     checkColors(host.nodes, palette);
 
     for (const [first, second, quote] of [
-      ["meridian", "pip", "You swing like you're carrying the whole sky."],
-      ["rook", "basalt", "Basalt, cover me. Again."],
-      ["vesper", "cog", "Cog, patch me into every channel we've got."],
+      ["cap", "ironman", "Big man in a suit of armor. Take that off, what are you?"],
+      ["thor", "hulk", "Strongest Avenger reporting in."],
+      ["widow", "hawkeye", "Just like Budapest all over again."],
     ]) {
       host.nodes.length = 0;
       battle("other", [{ address: "a" }, { address: "b" }], { a: first, b: second }, nativeTheme(palette));
@@ -216,8 +216,8 @@ test("mini battles use their own ship and palette, not the active space's backdr
     }
 
     host.nodes.length = 0;
-    battle("other", [{ address: "a" }, { address: "b" }], { a: "meridian", b: "vesper" }, nativeTheme(palette));
-    assert(!host.nodes.some(n => n.calls.some(c => c[0] === "child" && c[1] === "Kneel, Captain. The last day has already begun.")));
+    battle("other", [{ address: "a" }, { address: "b" }], { a: "ironman", b: "vision" }, nativeTheme(palette));
+    assert(!host.nodes.some(n => n.calls.some(c => c[0] === "child" && c[1] === "A tin suit against Latveria's sovereign? How quaint.")));
   }
 });
 

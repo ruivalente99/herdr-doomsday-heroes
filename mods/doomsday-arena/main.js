@@ -6,8 +6,8 @@ import { HEROES, PRESETS, normalizeRoster, frontsFor, exchange } from "./choreog
 
 // Mods are sandboxed, so read the ship ID shared by Doomsday Heroes Systems.
 const SHIP_NAMES = {
-  "skyrunner": "Skyrunner", "arrowhawk": "Arrowhawk", "nightglass": "Nightglass",
-  "bastion": "Bastion", "longbow": "Longbow", "dart": "Dart", "eclipse-barge": "Eclipse Barge",
+  "skyrunner": "Quinjet", "arrowhawk": "Avenjet", "nightglass": "Royal Talon",
+  "bastion": "Helicarrier", "longbow": "Benatar", "dart": "S.H.I.E.L.D. Dart", "eclipse-barge": "Latverian Barge",
 };
 
 function button(id, text, t, action, selected = false) {

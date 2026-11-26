@@ -7,7 +7,7 @@
       "title": "Doomsday Heroes: Battle Simulator",
       "command": "mod.open",
       "args": { "name": "doomsday-arena" },
-      "words": "arena demo battle combat energy blades pulse pistols custom squads conversations"
+      "words": "avengers arena demo battle combat repulsor shield mjolnir doom custom squads conversations"
     }
   ]
 }

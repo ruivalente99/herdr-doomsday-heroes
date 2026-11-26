@@ -5,31 +5,36 @@ import { settings, shared, layout } from "herdr";
 const SPRITE_DIR = "mods/doomsday-agents/sprites/doomsday";
 const WEAPON_DIR = `${SPRITE_DIR}/weapons`;
 export const SPRITE_SIZE = 36;
+const MELEE_WEAPONS = new Set(["shield", "mjolnir", "smash", "baton", "claw", "scepter"]);
+const RANGED_WEAPONS = new Set(["repulsor", "arrow", "web", "mind-beam", "doom-blast"]);
 const WEAPONS = {
-  umbra: "blade-red", meridian: "blade-green", "aldric": "blade-blue", pip: "blade-green",
-  nyx: "blade-white", "hexa": "blade-purple", vesper: "pulse", rook: "pulse",
-  "kestrel": "pulse", basalt: "launcher", husk: "pulse", cog: "arc-zap",
-  "morrow": "void-bolt", juno: null, vale: null,
+  doom: "doom-magic", ironman: "repulsor", cap: "shield", thor: "mjolnir",
+  hulk: "smash", widow: "baton", hawkeye: "arrow", spiderman: "web",
+  strange: "eldritch", wanda: "chaos", panther: "claw", vision: "mind-beam",
+  loki: "scepter", fury: null, doombot: "doom-blast",
 };
 const NAMES = {
-  umbra: "Umbra", meridian: "Meridian", "aldric": "Aldric", pip: "Pip", nyx: "Nyx",
-  "hexa": "Hexa", vesper: "Vesper", rook: "Rook", "kestrel": "Kestrel", basalt: "Basalt",
-  husk: "Husk drone", cog: "Cog", juno: "Juno", vale: "Dr. Vale", "morrow": "Morrow",
+  doom: "Doctor Doom", ironman: "Iron Man", cap: "Captain America", thor: "Thor",
+  hulk: "Hulk", widow: "Black Widow", hawkeye: "Hawkeye", spiderman: "Spider-Man",
+  strange: "Doctor Strange", wanda: "Scarlet Witch", panther: "Black Panther",
+  vision: "Vision", loki: "Loki", fury: "Nick Fury", doombot: "Doombot",
 };
 const SHIPS = new Set(["skyrunner", "arrowhawk", "nightglass", "bastion", "longbow", "dart", "eclipse-barge"]);
 const CONVERSATIONS = [
-  { pair: ["umbra", "meridian"], lines: [["umbra", "Kneel, Captain. The last day has already begun."], ["meridian", "Then I'll spend all of it standing."]] },
-  { pair: ["meridian", "pip"], lines: [["pip", "You swing like you're carrying the whole sky."], ["meridian", "Some days I am."]] },
-  { pair: ["rook", "basalt"], lines: [["rook", "Basalt, cover me. Again."], ["basalt", "I am always covering you."]] },
-  { pair: ["vesper", "cog"], lines: [["vesper", "Cog, patch me into every channel we've got."], ["cog", "Bzzt! Channels open."]] },
-  { pair: ["aldric", "umbra"], lines: [["aldric", "I knew you before the crown, Umbra."], ["umbra", "That man burned with his kingdom."]] },
-  { pair: ["rook", "kestrel"], lines: [["kestrel", "Calder. You owe me a glider."], ["rook", "Send the bill to the end of the world."]] },
-  { pair: ["juno", "cog"], lines: [["juno", "Cog, do not plug into strange consoles."], ["cog", "Whirr. Already plugged in."]] },
-  { pair: ["hexa", "morrow"], lines: [["hexa", "Your sigils are borrowed, Morrow."], ["morrow", "Everything is borrowed. I simply never return it."]] },
-  { pair: ["aldric", "nyx"], lines: [["aldric", "Who taught you that entrance?"], ["nyx", "You did. I just skipped the speech after."]] },
-  { pair: ["vale", "juno"], lines: [["vale", "Juno, open a channel to their side."], ["juno", "At last. A task with an acceptable survival rate."]] },
-  { pair: ["pip", "morrow"], lines: [["pip", "Your void is very loud for something empty."], ["morrow", "The simulator is merely warming up."]] },
-  { pair: ["nyx", "umbra"], lines: [["nyx", "I don't take orders from crowns."], ["umbra", "Then show me what you have learned."]] },
+  { pair: ["doom", "ironman"], lines: [["doom", "A tin suit against Latveria's sovereign? How quaint."], ["ironman", "Says the guy wearing a medieval cosplay helmet."]] },
+  { pair: ["cap", "ironman"], lines: [["ironman", "Big man in a suit of armor. Take that off, what are you?"], ["cap", "Still standing when the build breaks."]] },
+  { pair: ["thor", "hulk"], lines: [["thor", "Strongest Avenger reporting in."], ["hulk", "Hulk strongest! Point break wrong!"]] },
+  { pair: ["thor", "loki"], lines: [["loki", "I have been falling for thirty minutes!"], ["thor", "Stop turning into snakes and help me deploy."]] },
+  { pair: ["widow", "hawkeye"], lines: [["widow", "Just like Budapest all over again."], ["hawkeye", "You and I remember Budapest very differently."]] },
+  { pair: ["spiderman", "ironman"], lines: [["spiderman", "Mr. Stark, I found a bug in the training sim!"], ["ironman", "Kid, stay on your feet and keep the webs off my visor."]] },
+  { pair: ["strange", "wanda"], lines: [["strange", "The multiverse is not a playground, Wanda."], ["wanda", "You break the rules and become a hero. I do it and it's a warning."]] },
+  { pair: ["strange", "doom"], lines: [["doom", "Your mystic trinkets pale before Doom's sorcery."], ["strange", "I've bargained with worse than you, Victor."]] },
+  { pair: ["cap", "panther"], lines: [["panther", "Your shield holds up well, Captain."], ["cap", "Wakanda makes good gear. Try not to scratch it."]] },
+  { pair: ["wanda", "vision"], lines: [["vision", "Our odds improve markedly when we synchronize."], ["wanda", "Then stay close, Vis."]] },
+  { pair: ["fury", "ironman"], lines: [["fury", "Stark, I need results, not sarcasm."], ["ironman", "You hired me for both, Director."]] },
+  { pair: ["spiderman", "strange"], lines: [["spiderman", "Oh, we're using our made-up names! I'm Spider-Man."], ["strange", "Focus, Parker. Portal on your left."]] },
+  { pair: ["doom", "cap"], lines: [["doom", "Kneel, Captain. Doomsday has already begun."], ["cap", "I can do this all day."]] },
+  { pair: ["panther", "widow"], lines: [["widow", "Try to keep up, Your Highness."], ["panther", "I never freeze, Romanoff."]] },
 ];
 
 export function find(node, id) {
@@ -66,12 +71,12 @@ export function battleDialogue(fighters, cast, turn = 0) {
   const lines = [];
   const blocked = fighters.find(agent => agent.status === "blocked");
   const done = fighters.find(agent => agent.status === "done");
-  if (blocked) lines.push([cast[blocked.address], "I need backup. Holding position!"]);
-  else if (done) lines.push([cast[done.address], "Mission complete. Bringing the squad home."]);
+  if (blocked) lines.push([cast[blocked.address], "Avengers, I need backup! Holding position!"]);
+  else if (done) lines.push([cast[done.address], "Mission complete. Bringing the team home."]);
   lines.push(...CONVERSATIONS.filter(({ pair }) => pair.every(hero => present.has(hero))).flatMap(({ lines }) => lines));
   if (!lines.length && fighters.length) {
-    lines.push([cast[fighters[0].address], "Squad, check in. Ready for the next run?"]);
-    if (fighters[1]) lines.push([cast[fighters[1].address], "Standing by. Whatever comes, we hold."]);
+    lines.push([cast[fighters[0].address], "Avengers, check in. Ready for the next run?"]);
+    if (fighters[1]) lines.push([cast[fighters[1].address], "On your left. Whatever it takes."]);
   }
   const [speaker, text] = lines[((turn % lines.length) + lines.length) % lines.length] ?? [];
   return { speaker, text };
@@ -84,20 +89,20 @@ function pulse(element, paused, property, from, to, period) {
 function miniFighter(agent, hero, x, facing, paused, hasTarget, t) {
   const active = hasTarget && (!agent.status || agent.status === "working");
   const weapon = WEAPONS[hero];
-  const blade = weapon?.startsWith("blade-");
-  const period = blade ? 1520 : 1180;
+  const melee = MELEE_WEAPONS.has(weapon);
+  const period = melee ? 1520 : 1180;
   const direction = facing === "right" ? 1 : -1;
   const body = div().relative().left(0).top(0).w(28).h(28)
     .child(image(`${SPRITE_DIR}/${hero}.svg`).w(28).h(28));
   if (active && weapon) {
-    const asset = weapon === "arc-zap" ? weapon : `${weapon}-${facing}`;
+    const asset = `${weapon}-${facing}`;
     body.child(image(`${WEAPON_DIR}/${asset}.svg`).w(24).h(12).absolute().top(13)
       .left(facing === "right" ? 16 : -12));
-    if (hero === "nyx") body.child(image(`${WEAPON_DIR}/${asset}.svg`).w(20).h(10)
+    if (hero === "widow" || hero === "panther") body.child(image(`${WEAPON_DIR}/${asset}.svg`).w(20).h(10)
       .absolute().top(20).left(facing === "right" ? 14 : -6));
   }
-  const dx = !active ? 0 : blade ? direction * 5 : hero === "cog" ? direction * 2 : direction * -1;
-  const dy = active && hero === "pip" ? -5 : active && hero === "kestrel" ? -3 : agent.status === "done" ? -2 : 0;
+  const dx = !active ? 0 : melee ? direction * 5 : direction * -1;
+  const dy = active && hero === "spiderman" ? -5 : active && hero === "ironman" ? -3 : agent.status === "done" ? -2 : 0;
   return div().id(`fight-${agent.address}`).absolute().left(x).top(4).w(28).h(28)
     .tooltip(`${NAMES[hero]} · ${agent.status ?? "working"}`)
     .child(pulse(pulse(body, paused, "left", 0, dx, period), paused, "top", 0, dy, period))
@@ -157,9 +162,9 @@ export function battleScene(space, members, cast, t, options = {}) {
     });
     const attacking = pair.some(agent => (!agent.status || agent.status === "working") && WEAPONS[cast[agent.address]]);
     const ranged = pair.some(agent => (!agent.status || agent.status === "working")
-      && ["pulse", "launcher"].includes(WEAPONS[cast[agent.address]]));
+      && RANGED_WEAPONS.has(WEAPONS[cast[agent.address]]));
     if (pair.length === 2 && ranged) lane.child(pulse(div().absolute().left(laneWidth / 2 - 9).top(18)
-      .w(18).h(2).bg(t.blocked), paused, "opacity", 0.1, 0.9, 1180));
+      .w(18).h(2).bg(t.accent), paused, "opacity", 0.1, 0.9, 1180));
     if (pair.length === 2 && attacking) {
       lane.child(pulse(div().absolute().left(laneWidth / 2 - 3).top(15).size(7)
         .text_size(10).text_color(t.working).child("✦"), paused, "opacity", 0, 1, 1520));

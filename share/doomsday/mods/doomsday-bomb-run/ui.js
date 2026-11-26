@@ -86,7 +86,7 @@ export function gamePanel(view, c) {
     : view.game.status === "won" ? t.done : !view.started || view.paused ? t.dim : t.accent;
   const frameWidth = WIDTH * view.tileSize;
   const panel = v_flex().id("bomb-run-root").relative().size_full().min_w(0).bg(t.surface).text_color(t.foreground)
-    .track_focus(view.focus).accessibility_label("Bomb Run — pixel-art starship game")
+    .track_focus(view.focus).accessibility_label("Bomb Run — pixel-art Avengers game")
     .on_mouse_down("left", () => view.focus.focus())
     .on_key_down((event, cx) => view.keyDown(event, cx))
     .on_key_up((event, cx) => {
@@ -167,7 +167,7 @@ export function gamePanel(view, c) {
       (_event, cx) => view.choosePayload(cx)).disabled(waiting)))
     .when(power.line, el => el.child(tool("bomb-run-line", "Q", "Plant facing line [Q]", t,
       (_event, cx) => view.launch(cx)).disabled(waiting)))
-    .child(tool("bomb-run-drop", "Charge", "Place a thermal detonator [Space]", t,
+    .child(tool("bomb-run-drop", "Charge", "Place a Stark Arc charge [Space]", t,
       (_event, cx) => view.drop(cx), true).disabled(waiting).opacity(waiting ? 0.35 : 1)));
   if (view.optionsOpen) panel.child(optionsPanel(view, c));
   return panel;

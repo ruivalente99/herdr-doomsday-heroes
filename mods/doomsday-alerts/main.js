@@ -15,82 +15,82 @@ const QUEST = {
   "needs you": { pose: "blocked", line: "needs backup" },
 };
 const HERO_NAMES = {
-  umbra: "King Umbra",
-  meridian: "Captain Meridian",
-  vesper: "Vesper",
-  rook: "Rook Calder",
-  basalt: "Basalt",
-  husk: "Husk drone",
-  cog: "Cog",
-  "aldric": "Sir Aldric",
-  pip: "Pip",
-  "kestrel": "Kestrel",
-  juno: "Juno",
-  vale: "Dr. Vale",
-  nyx: "Nyx",
-  "hexa": "Hexa",
-  "morrow": "Morrow",
+  doom: "Doctor Doom",
+  ironman: "Iron Man",
+  cap: "Captain America",
+  thor: "Thor",
+  hulk: "Hulk",
+  widow: "Black Widow",
+  hawkeye: "Hawkeye",
+  spiderman: "Spider-Man",
+  strange: "Doctor Strange",
+  wanda: "Scarlet Witch",
+  panther: "Black Panther",
+  vision: "Vision",
+  loki: "Loki",
+  fury: "Nick Fury",
+  doombot: "Doombot",
 };
 const HERO_LINES = {
-  umbra: {
-    done: (name) => `${name} has held the line`,
-    blocked: (name) => `${name} requires your immediate attention`,
+  doom: {
+    done: (name) => `${name}'s triumph was inevitable`,
+    blocked: (name) => `${name} demands your immediate attention`,
   },
-  meridian: {
+  ironman: {
+    done: (name) => `${name} wrapped the build — Jarvis, queue the music`,
+    blocked: (name) => `${name} needs a suit reboot`,
+  },
+  cap: {
     done: (name) => `${name} has completed the mission`,
-    blocked: (name) => `${name} needs a hand`,
+    blocked: (name) => `${name} needs backup on the line`,
   },
-  vesper: {
-    done: (name) => `${name} has secured the plans`,
-    blocked: (name) => `${name} is calling for backup`,
+  thor: {
+    done: (name) => `${name} brings victory from Asgard`,
+    blocked: (name) => `${name} calls for aid on the battlefield`,
   },
-  rook: {
-    done: (name) => `${name} made the jump`,
-    blocked: (name) => `${name} needs a co-pilot`,
+  hulk: {
+    done: (name) => `${name} smashed the mission`,
+    blocked: (name) => `${name} needs help — getting angry`,
   },
-  basalt: {
-    done: (name) => `${name} roars in triumph`,
-    blocked: (name) => `${name} is calling for help`,
+  widow: {
+    done: (name) => `${name} cleared the ledger`,
+    blocked: (name) => `${name} is calling for extraction`,
   },
-  husk: {
-    done: (name) => `${name} reports: target secured`,
-    blocked: (name) => `${name} lost the target`,
+  hawkeye: {
+    done: (name) => `${name} hit the bullseye`,
+    blocked: (name) => `${name} is out of arrows and needs backup`,
   },
-  cog: {
-    done: (name) => `${name} beeps: mission complete`,
-    blocked: (name) => `${name} is sending an alert`,
+  spiderman: {
+    done: (name) => `${name} wrapped it up in webbing`,
+    blocked: (name) => `${name}'s spider-sense is tingling — needs help`,
   },
-  "aldric": {
-    done: (name) => `${name} has brought balance to the mission`,
-    blocked: (name) => `${name} is waiting for backup`,
+  strange: {
+    done: (name) => `${name} found the one winning outcome`,
+    blocked: (name) => `${name} sees a timeline snag`,
   },
-  pip: {
-    done: (name) => `Mission complete, hmm. Pip has.`,
-    blocked: (name) => `A disturbance in the mission, Pip senses.`,
+  wanda: {
+    done: (name) => `${name} bent reality to finish`,
+    blocked: (name) => `${name} needs backup to contain this`,
   },
-  "kestrel": {
-    done: (name) => `${name} returned with the bounty`,
-    blocked: (name) => `${name}'s target is still at large`,
-  },
-  juno: {
-    done: (name) => `${name} calculates a successful mission`,
-    blocked: (name) => `${name} reports a highly improbable outcome`,
-  },
-  vale: {
-    done: (name) => `${name} has secured the alliance`,
+  panther: {
+    done: (name) => `${name} secured the objective`,
     blocked: (name) => `${name} requests reinforcements`,
   },
-  nyx: {
-    done: (name) => `${name} completed the mission her way`,
-    blocked: (name) => `${name} could use a hand`,
+  vision: {
+    done: (name) => `${name} calculated a successful mission`,
+    blocked: (name) => `${name} reports an unexpected anomaly`,
   },
-  "hexa": {
-    done: (name) => `${name} has delivered justice`,
-    blocked: (name) => `${name} needs backup to finish this`,
+  loki: {
+    done: (name) => `${name} achieved glorious purpose`,
+    blocked: (name) => `${name} admits a minor complication`,
   },
-  "morrow": {
-    done: () => "Everything is proceeding as foreseen",
-    blocked: () => "The Emperor foresees complications",
+  fury: {
+    done: (name) => `${name} marks the operation complete`,
+    blocked: (name) => `${name} needs you on deck immediately`,
+  },
+  doombot: {
+    done: (name) => `${name} reports: directive complete`,
+    blocked: (name) => `${name} lost uplink with Latveria`,
   },
 };
 

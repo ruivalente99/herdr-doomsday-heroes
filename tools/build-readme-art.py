@@ -90,7 +90,7 @@ def window(side, x, ship, cards, duel, quote, speaker):
     for i, (hero, name, mood, role) in enumerate(cards):
         y = 228 + i * 79
         out += [rect(10, y, 190, 70, t["surface"], 7, t["border"]), sprite(hero, 16, y + 8),
-                text(72, y + 24, name, t["foreground"], 14, 600),
+                text(72, y + 24, name, t["foreground"], 13, 600),
                 text(72, y + 43, mood, t[role], 11),
                 rect(72, y + 54, 112, 3, t["border"], 1), rect(72, y + 54, 67 + i * 12, 3, t[role], 1)]
     out += [rect(222, 61, 416, 398, t["background"], 8, t["border"]),
@@ -133,14 +133,14 @@ def build_arena():
     SYMBOLS.clear()
     t = dark_theme()
     image = base64.b64encode((ROOT / "backgrounds/ships/eclipse/arrowhawk.png").read_bytes()).decode()
-    fronts = [("01 / BLADE DUEL", "aldric", "umbra", "blade-blue-right", "blade-red-left", "Aldric", "Umbra"),
-              ("02 / BLADE DUEL", "nyx", "hexa", "blade-white-right", "blade-purple-left", "Nyx", "Hexa"),
-              ("03 / VOID / TECH", "pip", "morrow", "blade-green-right", "void-bolt-left", "Pip", "Morrow")]
+    fronts = [("01 / ARCANE / MYSTIC", "ironman", "doom", "repulsor-right", "doom-magic-left", "Iron Man", "Doctor Doom"),
+              ("02 / ARCANE / MYSTIC", "strange", "wanda", "eldritch-right", "chaos-left", "Dr. Strange", "Scarlet Witch"),
+              ("03 / MELEE DUEL", "thor", "loki", "mjolnir-right", "scepter-left", "Thor", "Loki")]
     body = [rect(0, 0, 840, 470, t["background"], 16),
             text(28, 46, "Doomsday Heroes · Battle Simulator", t["foreground"], 22, 700, 'font-family="Trebuchet MS, Verdana, sans-serif"'),
-            text(28, 70, "Illustrated training session · no real agent actions", t["muted"], 12),
+            text(28, 70, "Illustrated Avengers training session · no real agent actions", t["muted"], 12),
             text(812, 46, "ILLUSTRATION", t["done"], 11, 600, 'text-anchor="end" letter-spacing="1"')]
-    for i, preset in enumerate(["Classic", "Doomsday", "Strike team", "Council", "Custom"]):
+    for i, preset in enumerate(["Avengers", "Doomsday", "Strike team", "Council", "Custom"]):
         x = 28 + i * 82
         body += [rect(x, 88, 74, 26, t["surface"], 6, t["accent"] if preset == "Doomsday" else t["border"]),
                  text(x + 37, 105, preset, t["accent"] if preset == "Doomsday" else t["foreground"], 12, 500, 'text-anchor="middle"')]
@@ -158,11 +158,11 @@ def build_arena():
                  rect(x + 20, 298, 210, 1, t["border"]),
                  text(x + 66, 324, na, t["foreground"], 13, 500, 'text-anchor="middle"'),
                  text(x + 184, 324, nb, t["foreground"], 13, 500, 'text-anchor="middle"')]
-    body += [sprite("umbra", 28, 388, 44), rect(84, 382, 728, 56, t["popover"], 10, t["border"]),
-             text(102, 404, "Umbra · Squad", t["accent"], 11, 600),
-             text(102, 426, "That name no longer has any meaning for me.", t["foreground"], 14)]
+    body += [sprite("doom", 28, 388, 44), rect(84, 382, 728, 56, t["popover"], 10, t["border"]),
+             text(102, 404, "Doctor Doom · Squad", t["accent"], 11, 600),
+             text(102, 426, "A tin suit against Latveria's sovereign? How quaint.", t["foreground"], 14)]
     ARENA.write_text(page(840, 470, "Doomsday Heroes Battle Simulator — illustration",
-                          "Illustrated Battle Simulator with three training fronts, using the project's pixel-art characters and weapons. Not a screenshot.", body), encoding="utf-8")
+                          "Illustrated Battle Simulator with three Avengers training fronts, using the project's pixel-art characters and weapons. Not a screenshot.", body), encoding="utf-8")
     print(f"Built {ARENA.relative_to(ROOT)}")
 
 
@@ -175,7 +175,7 @@ def build_bomb_run():
     tile = lambda c, r: (ox + c * 16 * scale, oy + (32 + r * 16) * scale)
     body = [rect(0, 0, 464, 640, t["background"], 14),
             rect(12, 14, 34, 28, t["surface"], 6), text(29, 33, "02", t["blocked"], 13, 600, 'text-anchor="middle"'),
-            text(56, 34, "Launch hangar", t["foreground"], 16, 600),
+            text(56, 34, "Helicarrier Deck", t["foreground"], 16, 600),
             text(440, 34, "ILLUSTRATION", t["muted"], 10, 600, 'text-anchor="end" letter-spacing="1"'),
             text(24, 92, "Score", t["muted"], 11), text(64, 92, "0240", t["foreground"], 14, 600),
             text(232, 92, "Hostiles 3/4", t["foreground"], 12, 500, 'text-anchor="middle"'),
@@ -190,14 +190,14 @@ def build_bomb_run():
     for c in range(3, 8):
         body.append(artwork(f"{BOMB_ART}/blast-h-1.svg", *tile(c, 5), 16 * scale))
     body.append(artwork(f"{BOMB_ART}/detonator-1.svg", *tile(5, 3), 16 * scale))
-    for hero, c, r in [("meridian", 1, 1), ("basalt", 11, 1), ("husk", 8, 3), ("nyx", 1, 9), ("morrow", 11, 9)]:
+    for hero, c, r in [("ironman", 1, 1), ("hulk", 11, 1), ("doombot", 8, 3), ("spiderman", 1, 9), ("doom", 11, 9)]:
         x, y = tile(c, r)
         body.append(sprite(hero, x - 4, y - 10, 40))
-    body += [sprite("meridian", 22, 586, 36), text(68, 600, "Captain Meridian", t["foreground"], 13, 600),
+    body += [sprite("ironman", 22, 586, 36), text(68, 600, "Iron Man", t["foreground"], 13, 600),
              text(68, 618, "Scout · 310 / 600", t["muted"], 11),
              rect(24, 630, 416, 3, t["border"], 1), rect(24, 630, 217, 3, t["blocked"], 1)]
     BOMB_RUN.write_text(page(464, 640, "Bomb Run — illustration",
-                             "Illustrated Bomb Run deck built from the game's own pixel art: the Launch Hangar map, coolant cells, a thermal charge, a blast lane and the cast. Not a screenshot.", body), encoding="utf-8")
+                             "Illustrated Bomb Run deck built from the game's own pixel art: the Launch Hangar map, coolant cells, a thermal charge, a blast lane and the Avengers cast. Not a screenshot.", body), encoding="utf-8")
     print(f"Built {BOMB_RUN.relative_to(ROOT)}")
 
 
@@ -206,15 +206,15 @@ def main():
     build_bomb_run()
     SYMBOLS.clear()
     light = window("light", 48, "arrowhawk", [
-        ("meridian", "Captain Meridian", "On mission", "working"),
-        ("vesper", "Vesper", "Holding the line", "working"),
-        ("cog", "Cog", "On mission", "working"),
-    ], ("meridian", "pip", "blade-green-right", "blade-green-left"), "You swing like you're carrying the whole sky.", 1)
+        ("ironman", "Iron Man", "On mission", "working"),
+        ("cap", "Captain America", "Holding the line", "working"),
+        ("thor", "Thor", "On mission", "working"),
+    ], ("cap", "ironman", "shield-right", "repulsor-left"), "Still standing when the build breaks.", 0)
     dark = window("dark", 740, "skyrunner", [
-        ("umbra", "King Umbra", "On mission", "working"),
-        ("kestrel", "Kestrel", "Front line", "working"),
-        ("nyx", "Nyx", "On mission", "working"),
-    ], ("hexa", "morrow", "blade-purple-right", "void-bolt-left"), "Your sigils are borrowed, Morrow.", 0)
+        ("doom", "Doctor Doom", "On mission", "working"),
+        ("wanda", "Scarlet Witch", "Front line", "working"),
+        ("spiderman", "Spider-Man", "On mission", "working"),
+    ], ("strange", "doom", "eldritch-right", "doom-magic-left"), "Your mystic trinkets pale before Doom's sorcery.", 1)
     content = [
         '<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" role="img" aria-labelledby="title description">',
         '<title id="title">Doomsday Heroes for Herdr — one workspace, two sides</title>',

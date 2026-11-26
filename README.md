@@ -1,8 +1,8 @@
 <h1 align="center">Doomsday Heroes for Herdr</h1>
 
 <p align="center">
-  <strong>A Doomsday Heroes command center for your coding agents.</strong><br>
-  Pixel-art characters, ship cockpits and live agent status — inside <a href="https://herdr.dev">Herdr</a>.
+  <strong>An Avengers: Doomsday command center for your coding agents.</strong><br>
+  Pixel-art Avengers sprites, ship cockpits and live agent status — inside <a href="https://herdr.dev">Herdr</a>.
 </p>
 
 <p align="center">
@@ -52,7 +52,7 @@ One layout, two coordinated appearances:
 | Vanguard | Eclipse |
 | --- | --- |
 | Ivory surfaces, blue accents and warm cockpit lighting. | Charcoal surfaces, muted red accents and darker cockpits. |
-| 14 available characters. | The same roster, with King Umbra joining the cast. |
+| 14 available Avengers & Doombots. | The same roster, with Doctor Doom joining the cast. |
 
 The layout follows system appearance until you select a side. Use **Doomsday Heroes: Vanguard** or **Doomsday Heroes: Eclipse** in the command palette, or run:
 
@@ -68,42 +68,42 @@ These commands change both appearance and palette while preserving unrelated set
 
 <table>
   <tr>
-    <th>Vanguard · Arrowhawk</th>
-    <th>Eclipse · Skyrunner</th>
+    <th>Vanguard · Avenjet</th>
+    <th>Eclipse · Quinjet</th>
   </tr>
   <tr>
-    <td><img src="backgrounds/ships/vanguard/arrowhawk.png" alt="Vanguard Arrowhawk cockpit" width="100%"></td>
-    <td><img src="backgrounds/ships/eclipse/skyrunner.png" alt="Eclipse Skyrunner cockpit" width="100%"></td>
+    <td><img src="backgrounds/ships/vanguard/arrowhawk.png" alt="Vanguard Avenjet cockpit" width="100%"></td>
+    <td><img src="backgrounds/ships/eclipse/skyrunner.png" alt="Eclipse Quinjet cockpit" width="100%"></td>
   </tr>
 </table>
 
-Every ship has both appearances: **Skyrunner, Arrowhawk, Nightglass, Bastion, Longbow, Dart** and **Eclipse Barge**. Each space keeps a stable ship identity; its cockpit follows that space and the active appearance.
+Every ship has both appearances: **Quinjet, Avenjet, Royal Talon, Helicarrier, Benatar, S.H.I.E.L.D. Dart** and **Latverian Barge**. Each space keeps a stable ship identity; its cockpit follows that space and the active appearance.
 
 </details>
 
 ## The cast
 
 <p align="center">
-  <img src="mods/doomsday-agents/sprites/doomsday/meridian.svg" alt="Captain Meridian" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/vesper.svg" alt="Vesper" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/rook.svg" alt="Rook Calder" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/basalt.svg" alt="Basalt" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/cog.svg" alt="Cog" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/husk.svg" alt="Husk drone" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/umbra.svg" alt="King Umbra" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/aldric.svg" alt="Sir Aldric" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/pip.svg" alt="Pip" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/kestrel.svg" alt="Kestrel" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/juno.svg" alt="Juno" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/vale.svg" alt="Dr. Vale" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/nyx.svg" alt="Nyx" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/hexa.svg" alt="Hexa" width="40">
-  <img src="mods/doomsday-agents/sprites/doomsday/morrow.svg" alt="Morrow" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/ironman.svg" alt="Iron Man" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/cap.svg" alt="Captain America" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/thor.svg" alt="Thor" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/hulk.svg" alt="Hulk" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/widow.svg" alt="Black Widow" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/hawkeye.svg" alt="Hawkeye" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/spiderman.svg" alt="Spider-Man" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/strange.svg" alt="Doctor Strange" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/wanda.svg" alt="Scarlet Witch" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/panther.svg" alt="Black Panther" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/vision.svg" alt="Vision" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/loki.svg" alt="Loki" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/fury.svg" alt="Nick Fury" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/doombot.svg" alt="Doombot" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/doom.svg" alt="Doctor Doom" width="40">
 </p>
 
-Meridian, Vesper, Rook, Basalt, Cog, a Husk drone, Aldric, Pip, Kestrel, Juno, Dr. Vale, Nyx, Hexa and Morrow are available in both appearances. Umbra joins on the Eclipse.
+Iron Man, Captain America, Thor, Hulk, Black Widow, Hawkeye, Spider-Man, Doctor Strange, Scarlet Witch, Black Panther, Vision, Loki, Nick Fury and Doombot are available in both appearances. Doctor Doom joins on the Eclipse.
 
-Characters stay unique across agents; extra agents receive Husk drones after the other available characters are assigned.
+Characters stay unique across agents; extra agents receive Doombots after the other available characters are assigned.
 
 | Agent status | In your workspace |
 | --- | --- |
@@ -124,9 +124,9 @@ Each space has its own **Pause** control. Use **Squad** to page through larger g
 
 A separate training scene, with no commands sent to real agents.
 
-1. **Build a matchup.** Choose **Classic**, **Doomsday**, **Strike team** or **Council**, or pick **Custom** and select 2–8 fighters from the full cast. Selection order defines pairs; an odd fighter stays on standby.
-2. **Follow the action.** Up to four fronts run at once, with blade clashes, pulse bursts, Pip's jumps, Kestrel's jetpack, Nyx's twin white blades, Hexa's purple blade and Morrow's void bolts. Support characters remain unarmed.
-3. **Tune the conversation.** Click a fighter to hear that front; click again to return to squad comms. Use **Next line** to advance or **Replay** to restart the conversation. Current and previous lines appear in separate speech bubbles with speaker portraits, mixing film quotes with original training banter.
+1. **Build a matchup.** Choose **Avengers**, **Doomsday**, **Strike team** or **Council**, or pick **Custom** and select 2–8 fighters from the full cast. Selection order defines pairs; an odd fighter stays on standby.
+2. **Follow the action.** Up to four fronts run at once, with Captain America's Vibranium Shield, Thor's Mjolnir, Iron Man's repulsors & thrusters, Hulk's gamma smash, Spider-Man's webs & leaps, Black Widow's twin batons, Black Panther's twin claws, Doctor Strange's eldritch magic, Scarlet Witch's chaos hexes and Doctor Doom's arcane bolts. Nick Fury remains unarmed on tactical support.
+3. **Tune the conversation.** Click a fighter to hear that front; click again to return to squad comms. Use **Next line** to advance or **Replay** to restart the conversation. Current and previous lines appear in separate speech bubbles with speaker portraits and Avengers training banter.
 4. **Set the pace.** Choose **0.5× / 1× / 2×**, **Pause / Resume**, or **Motion: reduced** to keep comms without moving or pulsing effects. Close with **Close** or Escape.
 
 Open **Doomsday Heroes: Battle Simulator** from the command palette, use **Expand** in a mini battle, or run:
@@ -141,7 +141,7 @@ Expanded battles keep their source space's cockpit, even when another space is a
 <summary>See the Arena</summary>
 
 <p align="center">
-  <img src="docs/images/arena.svg" alt="Illustrated Battle Simulator with the Doomsday preset: Aldric and Umbra, Nyx and Hexa, and Pip and Morrow on three training fronts" width="840">
+  <img src="docs/images/arena.svg" alt="Illustrated Battle Simulator with the Doomsday preset: Iron Man and Doctor Doom, Doctor Strange and Scarlet Witch, and Thor and Loki on three training fronts" width="840">
   <br>
   <sub>Illustration built from the project artwork. Not a screenshot.</sub>
 </p>
@@ -160,7 +160,7 @@ A dedicated pixel-art deck, with space visible through the forward windows, wall
 
 Click **Start mission** or press **Enter** to play. Hold **WASD / arrow keys** to walk, and press **Space** to plant a charge. **P / Escape** pauses; **Enter** resumes; **R** restarts the current deck without losing pilot upgrades. The **×** at the far right of the toolbar always closes the game panel or overlay. Escape from the start, defeat or pause screen also closes it. Switching tabs, leaving the game or hiding Herdr automatically pauses the run. The pilot arrows load another agent's progress; **↗** opens a separate larger game. This is a local training game: it never commands real agents.
 
-**Characters stay unique, including your pilot.** Only Husk drones can repeat. Clearing a deck unlocks **Next deck**. Eight zones now have different solid-wall maps, props, palettes and ship architecture: **Reactor Core, Launch Hangar, Cryo Vault, Smuggler Hold, Ion Engines, Command Bridge, Detention Block and Droid Foundry**. Later sectors revisit these zones with new coolant placements and opposing rosters. Patrols get faster and the squad grows from four to eight hostiles.
+**Characters stay unique, including your pilot.** Only Doombots can repeat. Clearing a zone unlocks **Next deck**. Eight Avengers zones each have their own solid-wall maps, props, palettes and architecture: **Stark Arc Core, Helicarrier Deck, Hydra Siberia Lab, Wakanda Vault, Sanctum Sanctorum, Avengers Tower, The Raft and Castle Doom Foundry**. Later sectors revisit these zones with new energy cell placements and opposing rosters. Patrols get faster and the squad grows from four to eight hostiles.
 
 **Your agent's pilot evolves through milestones, not loot.** Coolant cells give 5 XP, hostiles 40 XP, and clearing a deck another 75 XP. XP and the highest unlocked deck are saved locally per agent, including after defeat or reopening. Ranks track XP, while combat upgrades require **both** a minimum deck and total XP. There are no floor modules, random drops or stackable buffs.
 
@@ -181,7 +181,7 @@ Click **Start mission** or press **Enter** to play. Hold **WASD / arrow keys** t
 <summary>See Bomb Run</summary>
 
 <p align="center">
-  <img src="docs/images/bomb-run.svg" alt="Illustrated Bomb Run on the Launch Hangar deck with coolant cells, a thermal charge, a blast lane and the cast" width="440">
+  <img src="docs/images/bomb-run.svg" alt="Illustrated Bomb Run on the Helicarrier Deck with energy cells, a Stark Arc charge, a blast lane and the Avengers cast" width="440">
   <br>
   <sub>Illustration built from the game's own pixel art. Not a screenshot.</sub>
 </p>
@@ -191,9 +191,9 @@ Click **Start mission** or press **Enter** to play. Hold **WASD / arrow keys** t
 <details>
 <summary>Explore all eight deck layouts</summary>
 
-<img src="docs/images/bomb-run-decks.png" alt="Pixel-art layout overview of Reactor, Hangar, Cryo, Cargo, Engines, Bridge, Detention and Foundry zones" width="896">
+<img src="docs/images/bomb-run-decks.png" alt="Pixel-art layout overview of Stark Arc Core, Helicarrier Deck, Hydra Siberia Lab, Wakanda Vault, Sanctum Sanctorum, Avengers Tower, The Raft and Castle Doom Foundry zones" width="896">
 
-Generated artwork and fixed wall layouts, not an app screenshot. Coolant cells and characters are omitted so each zone’s architecture is visible.
+Generated artwork and fixed wall layouts, not an app screenshot. Energy cells and characters are omitted so each zone’s architecture is visible.
 
 </details>
 
@@ -265,10 +265,10 @@ This repository is a [Herdr community layout](https://herdr.dev/layouts): the ro
 
 ## Inspiration and credits
 
-Inspired by [Herdr Middle-earth](https://github.com/joaovitorwoliveira/herdr-middle-earth), particularly its character-driven approach to a Herdr workspace. Pixel-art styling was also informed by [King Umbra CSS Pixelart](https://github.com/alexaquino/darth-umbra-css-pixelart).
+Inspired by [Herdr Middle-earth](https://github.com/joaovitorwoliveira/herdr-middle-earth), particularly its character-driven approach to a Herdr workspace.
 
 General Herdr behavior is adapted from the `agents`, `toast`, `workspace-status` and `spaces` mods. Their source lineage is recorded in each mod's `cloned_from` metadata. See [Inspiration and credits](docs/inspiration.md) for more context.
 
 ---
 
-Every hero, villain, line of dialogue and piece of artwork in this project is original. It is a personal project and is not affiliated with any film studio or comic publisher.
+Fan-made pixel-art tribute project for Herdr. Not affiliated with or endorsed by Marvel Studios or Disney.

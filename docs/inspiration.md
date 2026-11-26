@@ -14,4 +14,4 @@ Doomsday-specific work in this repository includes the paired Vanguard/Eclipse p
 
 ## Trademark note
 
-The Doomsday Heroes cast and artwork are original to this project. It is not affiliated with any film studio or comic publisher.
+The Avengers & Doctor Doom pixel-art sprites in this repository are fan-made tribute art for Herdr. This personal project is not affiliated with or endorsed by Marvel Studios or Disney.

@@ -1,5 +1,5 @@
 import { div, image } from "gpui-kit";
-import { HEROES, frontsFor, frontStyle } from "./choreography.js";
+import { HEROES, MELEE_WEAPONS, ARCANE_WEAPONS, frontsFor, frontStyle } from "./choreography.js";
 
 const SPRITES = "mods/doomsday-agents/sprites/doomsday";
 const STAGE_HEIGHT = 272;
@@ -27,20 +27,20 @@ function fighter(hero, id, x, y, size, facing, hasTarget, options, t, onSelect) 
   const { paused, reducedMotion, speed } = options;
   const still = paused || reducedMotion;
   const direction = facing === "right" ? 1 : -1;
-  const blade = profile.weapon?.startsWith("blade-");
-  const period = blade ? 1520 : profile.style === "heavy" ? 1800 : 1180;
+  const melee = MELEE_WEAPONS.has(profile.weapon);
+  const period = melee ? 1520 : profile.style === "heavy" ? 1800 : 1180;
   const dx = !hasTarget || profile.style === "support" ? 0
-    : blade ? direction * (profile.style === "acrobat" ? 22 : 16)
-    : profile.style === "droid" ? direction * 5 : direction * -3;
+    : melee ? direction * 16
+    : profile.style === "acrobat" ? direction * 12 : direction * -3;
   const dy = profile.style === "acrobat" ? -10 : profile.style === "jetpack" ? -7
-    : profile.style === "force" ? -3 : profile.style === "droid" ? 0 : -1;
+    : profile.style === "force" ? -3 : -1;
   const body = div().relative().left(0).top(0).w(size).h(size)
     .child(image(`${SPRITES}/${hero}.svg`).w(size).h(size));
   if (profile.weapon && hasTarget) {
-    const path = profile.weapon === "arc-zap" ? "arc-zap" : `${profile.weapon}-${facing}`;
+    const path = `${profile.weapon}-${facing}`;
     const weapon = image(`${SPRITES}/weapons/${path}.svg`).relative().top(0).w(46).h(23);
     body.child(div().absolute().left(facing === "right" ? size - 16 : -30).top(size * 0.48)
-      .child(motion(weapon, still, speed, "top", 0, blade ? -6 : -1, period)));
+      .child(motion(weapon, still, speed, "top", 0, melee ? -6 : -1, period)));
     if (profile.style === "dual") {
       body.child(image(`${SPRITES}/weapons/${path}.svg`).absolute()
         .left(facing === "right" ? size - 20 : -26).top(size * 0.7).w(38).h(19));
@@ -62,12 +62,15 @@ function fire(id, hero, x, target, y, options, t) {
   const still = options.paused || options.reducedMotion;
   const direction = target > x ? "right" : "left";
   const distance = Math.abs(target - x);
-  const color = weapon === "launcher" ? t.done : weapon === "pulse" ? t.blocked : t.accent;
-  const period = weapon === "launcher" ? 1800 : 1180;
-  if (weapon === "void-bolt" || weapon === "arc-zap") {
-    const asset = weapon === "arc-zap" ? weapon : `${weapon}-${direction}`;
+  const color = weapon === "doom-blast" ? t.done
+    : weapon === "mind-beam" ? t.working
+    : weapon === "web" ? t.foreground
+    : weapon === "arrow" ? t.blocked : t.accent;
+  const period = weapon === "doom-magic" ? 1800 : 1180;
+  if (ARCANE_WEAPONS.has(weapon)) {
+    const asset = `${weapon}-${direction}`;
     return motion(image(`${SPRITES}/weapons/${asset}.svg`).id(id).absolute()
-      .left(Math.min(x, target)).top(y - 6).w(distance).h(18).opacity(0.8),
+      .left(Math.min(x, target)).top(y - 6).w(distance).h(18).opacity(0.85),
     still, options.speed, "opacity", 0.05, 0.95, period);
   }
   // Extend a burst from the firing side, rather than a ping-pong bolt flying backwards.
@@ -109,7 +112,7 @@ export function arena(options, ship, t, dark, shipNames, onFront = () => {}) {
     cell.child(div().absolute().left(0).top(floor).w(width).h(height - floor).bg(t.chrome))
       .child(div().absolute().left(8).top(floor).w(width - 16).h(1).bg(t.border))
       .child(label(`${String(index + 1).padStart(2, "0")} / ${frontStyle(pair)}`, 8, 8, width - 16, t.working))
-      .child(label(ship ? shipNames[ship] ?? ship : "HOLODECK", 8, 27, width - 16, t.dim, 9));
+      .child(label(ship ? shipNames[ship] ?? ship : "TRAINING BAY", 8, 27, width - 16, t.dim, 9));
     for (const [slot, hero] of pair.entries()) {
       const x = pair.length === 1 ? center - size / 2 : slot === 0 ? left : right;
       const id = `arena-fighter-${index}-${slot}`;
@@ -118,16 +121,16 @@ export function arena(options, ship, t, dark, shipNames, onFront = () => {}) {
           (_event, cx) => onFront(index, cx)))
         .child(label(HEROES[hero].name, x - 15, floor + 7, size + 30, t.foreground));
       const weapon = HEROES[hero].weapon;
-      if (pair.length === 2 && weapon && !weapon.startsWith("blade-")) {
+      if (pair.length === 2 && weapon && !MELEE_WEAPONS.has(weapon)) {
         const origin = slot ? right - 4 : left + size + 4;
         const target = slot ? left + size - 10 : right + 10;
         const shotY = top + size * (slot ? 0.64 : 0.56);
         cell.child(fire(`${id}-burst`, hero, origin, target, shotY, options, t))
           .child(spark(`${id}-impact`, target, shotY, 8, t.working, still, options.speed,
-            weapon === "launcher" ? 1800 : 1180));
+            weapon === "doom-magic" ? 1800 : 1180));
       }
     }
-    if (pair.length === 2 && pair.some(hero => HEROES[hero].weapon?.startsWith("blade-"))) {
+    if (pair.length === 2 && pair.some(hero => MELEE_WEAPONS.has(HEROES[hero].weapon))) {
       cell.child(spark(`arena-clash-${index}`, center, top + size * 0.52, 14, t.working, still, options.speed, 1520));
     }
     stage.child(cell);

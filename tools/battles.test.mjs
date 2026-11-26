@@ -9,7 +9,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const read = path => readFileSync(resolve(root, path), "utf8");
 const source = path => read(path).replace(/^import .*;\n/gm, "").replace(/^export (const|function) /gm, "$1 ");
 const modelSource = source("mods/doomsday-arena/choreography.js");
-const model = new Function(`${modelSource}; return { HEROES, PRESETS, normalizeRoster, frontsFor, dialogueLines, exchange, frontStyle };`)();
+const model = new Function(`${modelSource}; return { HEROES, MELEE_WEAPONS, ARCANE_WEAPONS, PRESETS, normalizeRoster, frontsFor, dialogueLines, exchange, frontStyle };`)();
 const arenaSource = `${modelSource}\n${source("mods/doomsday-arena/scene.js")}\n${source("mods/doomsday-arena/main.js")}`
   .replace("export default class Arena", "return class Arena");
 const miniSource = source("mods/doomsday-agents/battle.js");
@@ -95,17 +95,18 @@ test("shared Battle Simulator command ships the current Arena and all required s
   assert.equal(metadata.overlay.height, 560);
 });
 
-test("custom rosters reject unknown data, cap at eight and only allow repeated Husk drones", () => {
+test("custom rosters reject unknown data, cap at eight and only allow repeated Doombots", () => {
   assert.deepEqual(model.normalizeRoster(null), []);
-  assert.deepEqual(model.normalizeRoster({ heroes: ["meridian"] }), []);
-  assert.deepEqual(model.normalizeRoster(["meridian", "missing", "__proto__", {}, null, "meridian", "husk", "husk"]),
-    ["meridian", "husk", "husk"]);
+  assert.deepEqual(model.normalizeRoster({ heroes: ["ironman"] }), []);
+  assert.deepEqual(model.normalizeRoster(["ironman", "missing", "__proto__", {}, null, "ironman", "doombot", "doombot"]),
+    ["ironman", "doombot", "doombot"]);
   assert.equal(model.normalizeRoster(Object.keys(model.HEROES)).length, 8);
-  assert.deepEqual(model.frontsFor(["rook", "kestrel", "juno"]), [["rook", "kestrel"], ["juno"]]);
-  assert.equal(model.frontStyle(["juno"]), "STANDBY");
-  assert.equal(model.frontStyle(["juno", "vale"]), "ESCORT / SUPPORT");
-  assert.equal(model.frontStyle(["meridian", "umbra"]), "BLADE DUEL");
-  assert.equal(model.frontStyle(["rook", "kestrel"]), "CROSS-FIRE");
+  assert.deepEqual(model.frontsFor(["widow", "hawkeye", "fury"]), [["widow", "hawkeye"], ["fury"]]);
+  assert.equal(model.frontStyle(["fury"]), "STANDBY");
+  assert.equal(model.frontStyle(["fury", "cap"]), "ESCORT / SUPPORT");
+  assert.equal(model.frontStyle(["cap", "thor"]), "MELEE DUEL");
+  assert.equal(model.frontStyle(["strange", "doom"]), "ARCANE / MYSTIC");
+  assert.equal(model.frontStyle(["hawkeye", "vision"]), "CROSS-FIRE");
 });
 
 test("every preset has valid fronts, attributed dialogue and real local assets", () => {
@@ -129,15 +130,15 @@ test("every preset has valid fronts, attributed dialogue and real local assets",
 });
 
 test("dialogue alternates speakers, wraps and excludes characters not in the squad", () => {
-  const roster = ["meridian", "umbra"];
+  const roster = ["ironman", "doom"];
   const first = model.exchange(roster, 0);
   const second = model.exchange(roster, 1);
-  assert.equal(first.speaker, "umbra");
-  assert.equal(first.text, "Kneel, Captain. The last day has already begun.");
-  assert.equal(second.speaker, "meridian");
+  assert.equal(first.speaker, "doom");
+  assert.equal(first.text, "A tin suit against Latveria's sovereign? How quaint.");
+  assert.equal(second.speaker, "ironman");
   assert.deepEqual(model.exchange(roster, model.dialogueLines(roster).length), first);
   assert.equal(model.exchange([], 1), null);
-  assert(model.dialogueLines(["rook", "kestrel"]).every(line => ["rook", "kestrel"].includes(line.speaker)));
+  assert(model.dialogueLines(["widow", "hawkeye"]).every(line => ["widow", "hawkeye"].includes(line.speaker)));
 });
 
 test("pause and hidden windows stop dialogue; reduced motion removes loops but keeps comms", () => {
@@ -194,54 +195,57 @@ test("custom selection handles full, empty and odd rosters without phantom oppon
   fixture.render();
   fixture.click("arena-mode-custom");
   assert.equal(fixture.view.custom.length, 8);
-  fixture.click("arena-pick-vale");
+  fixture.click("arena-pick-fury");
   assert.equal(fixture.view.custom.length, 8);
-  fixture.click("arena-pick-meridian");
-  fixture.click("arena-pick-vale");
-  assert.equal(fixture.view.custom.at(-1), "vale");
+  fixture.click("arena-pick-ironman");
+  fixture.click("arena-pick-fury");
+  assert.equal(fixture.view.custom.at(-1), "fury");
   assert.equal(fixture.view.custom.length, 8);
   for (const hero of [...fixture.view.custom]) fixture.click(`arena-pick-${hero}`);
   assert.equal(actors(fixture.nodes).length, 0);
   assert(hasText(fixture.nodes, "Choose at least two fighters to start a training simulation."));
-  fixture.click("arena-pick-rook");
+  fixture.click("arena-pick-widow");
   assert.equal(actors(fixture.nodes).length, 0);
-  fixture.click("arena-pick-kestrel");
-  fixture.click("arena-pick-juno");
+  fixture.click("arena-pick-hawkeye");
+  fixture.click("arena-pick-fury");
   assert.equal(actors(fixture.nodes).length, 3);
   assert(hasText(fixture.nodes, "02 / STANDBY"));
   assert(!byId(fixture.nodes, "arena-fighter-1-0-burst"));
   assertAssets(fixture.nodes);
 });
 
-test("all fifteen heroes render; support characters are unarmed and blade colors are correct", () => {
+test("all fifteen Avengers render; support characters are unarmed and dual-wield weapons render", () => {
   const heroes = Object.keys(model.HEROES);
+  assert.equal(heroes.length, 15);
   for (let index = 0; index < heroes.length; index += 2) {
     const roster = heroes.slice(index, index + 2);
-    if (roster.length === 1) roster.push("rook");
+    if (roster.length === 1) roster.push("cap");
     const fixture = arenaFixture({ fighters: roster });
     fixture.render();
     assert.equal(actors(fixture.nodes).length, 2);
     assertAssets(fixture.nodes);
   }
-  assert.equal(model.HEROES.juno.weapon, null);
-  assert.equal(model.HEROES.vale.weapon, null);
-  assert.equal(model.HEROES["hexa"].weapon, "blade-purple");
-  assert.equal(model.HEROES.nyx.weapon, "blade-white");
-  const dual = arenaFixture({ fighters: ["nyx", "hexa"] });
+  assert.equal(model.HEROES.fury.weapon, null);
+  assert.equal(model.HEROES.cap.weapon, "shield");
+  assert.equal(model.HEROES.thor.weapon, "mjolnir");
+  assert.equal(model.HEROES.widow.weapon, "baton");
+  assert.equal(model.HEROES.panther.weapon, "claw");
+  const dual = arenaFixture({ fighters: ["widow", "panther"] });
   dual.render();
-  assert.equal(dual.nodes.filter(node => node.asset?.endsWith("blade-white-right.svg")).length, 2);
+  assert.equal(dual.nodes.filter(node => node.asset?.endsWith("baton-right.svg")).length, 2);
+  assert.equal(dual.nodes.filter(node => node.asset?.endsWith("claw-left.svg")).length, 2);
 });
 
 test("expanded battles keep the source ship and front clicks focus only their conversation", () => {
-  const fixture = arenaFixture({ space: "other", fighters: ["rook", "kestrel", "meridian", "umbra"] });
+  const fixture = arenaFixture({ space: "other", fighters: ["widow", "hawkeye", "ironman", "doom"] });
   fixture.render();
   assert.equal(fixture.view.scenario, "custom");
   assert(fixture.nodes.some(node => node.asset === "backgrounds/ships/eclipse/longbow.png"));
   fixture.click("arena-fighter-0-0");
   assert.equal(fixture.view.focus, 0);
-  assert(hasText(fixture.nodes, "Calder. You owe me a glider."));
+  assert(hasText(fixture.nodes, "Just like Budapest all over again."));
   fixture.click("arena-next");
-  assert(hasText(fixture.nodes, "Send the bill to the end of the world."));
+  assert(hasText(fixture.nodes, "You and I remember Budapest very differently."));
   fixture.click("arena-fighter-0-1");
   assert.equal(fixture.view.focus, null);
   const checked = arenaFixture({}, true);
@@ -257,7 +261,7 @@ test("mini-battle messages occupy a separate flow row below sprites in source an
           ...host, shared: () => ({}), settings: () => ({ dark: true }),
           layout: () => ({ id: "sidebar", size: { px: width } }),
         });
-        const heroes = ["umbra", "meridian", "rook", "basalt", "vesper", "cog", "pip", "morrow"];
+        const heroes = ["doom", "ironman", "cap", "thor", "hulk", "widow", "hawkeye", "strange"];
         const members = heroes.slice(0, count).map((hero, index) => ({ address: `a${index}`, status: "working" }));
         const cast = Object.fromEntries(members.map((agent, index) => [agent.address, heroes[index]]));
         const stage = battle("one", members, cast, theme(), { turn: 1 });
@@ -282,17 +286,17 @@ test("mini-battle messages occupy a separate flow row below sprites in source an
 test("speech tails follow the speaking character without entering the sprite field", () => {
   const mini = miniFixture();
   const members = [{ address: "a" }, { address: "b" }];
-  const cast = { a: "umbra", b: "meridian" };
+  const cast = { a: "doom", b: "ironman" };
   const position = node => node.calls.find(call => call[0] === "left")?.[1];
   mini.battleScene("one", members, cast, theme(), { turn: 0 });
   const first = position(byId(mini.nodes, "fight-tail-one"));
   assert(byId(mini.nodes, "fight-bubble-one"));
-  assert(hasText(mini.nodes, "Umbra"));
+  assert(hasText(mini.nodes, "Doctor Doom"));
   mini.nodes.length = 0;
   mini.battleScene("one", members, cast, theme(), { turn: 1 });
   const second = position(byId(mini.nodes, "fight-tail-one"));
   assert.equal(second - first, 56);
-  assert(hasText(mini.nodes, "Meridian"));
+  assert(hasText(mini.nodes, "Iron Man"));
   const tail = byId(mini.nodes, "fight-tail-one");
   const bubble = byId(mini.nodes, "fight-bubble-one");
   assert.equal(tail.calls.find(call => call[0] === "top")[1], 0);
@@ -301,15 +305,15 @@ test("speech tails follow the speaking character without entering the sprite fie
 });
 
 test("Arena current and previous dialogue have separate bubbles, portraits and mirrored tails", () => {
-  const fixture = arenaFixture({ fighters: ["meridian", "umbra"] });
+  const fixture = arenaFixture({ fighters: ["ironman", "doom"] });
   fixture.render();
   assert(byId(fixture.nodes, "arena-speech-current"));
   assert(!byId(fixture.nodes, "arena-speech-previous"));
   fixture.click("arena-next");
   const current = byId(fixture.nodes, "arena-speech-current");
   const previous = byId(fixture.nodes, "arena-speech-previous");
-  assert(current.calls.some(call => call[0] === "accessibility_label" && call[1].startsWith("Meridian says:")));
-  assert(previous.calls.some(call => call[0] === "accessibility_label" && call[1].startsWith("Previously, King Umbra said:")));
+  assert(current.calls.some(call => call[0] === "accessibility_label" && call[1].startsWith("Iron Man says:")));
+  assert(previous.calls.some(call => call[0] === "accessibility_label" && call[1].startsWith("Previously, Doctor Doom said:")));
   assert(byId(fixture.nodes, "arena-tail-current").calls.some(call => call[0] === "left" && call[1] === -7));
   assert(byId(fixture.nodes, "arena-tail-previous").calls.some(call => call[0] === "right" && call[1] === -7));
   assertAssets(fixture.nodes);
@@ -320,19 +324,19 @@ test("shared mini bubbles do not attribute lines to fighters hidden on the bench
   const battle = new Function("host", `const { div, image, h_flex, shared, settings, layout } = host;\n${source("share/doomsday/mods/doomsday-agents/battle.js")}\nreturn battleScene;`)({
     ...host, shared: () => ({}), settings: () => ({ dark: true }), layout: () => ({ id: "sidebar", size: { px: 268 } }),
   });
-  const heroes = ["rook", "kestrel", "juno", "cog", "umbra", "meridian"];
+  const heroes = ["widow", "hawkeye", "fury", "vision", "doom", "ironman"];
   const members = heroes.map((hero, index) => ({ address: `a${index}` }));
   const cast = Object.fromEntries(members.map((agent, index) => [agent.address, heroes[index]]));
   battle("one", members, cast, theme());
-  // Visible fighters may talk; benched Umbra and Meridian must not.
-  assert(!hasText(host.nodes, "Kneel, Captain. The last day has already begun."));
-  assert(!hasText(host.nodes, "I knew you before the crown, Umbra."));
+  // Visible fighters may talk; benched Doctor Doom and Iron Man must not.
+  assert(!hasText(host.nodes, "A tin suit against Latveria's sovereign? How quaint."));
+  assert(!hasText(host.nodes, "Kneel, Captain. Doomsday has already begun."));
 });
 
 test("mini battles paginate every agent, keep duplicates and normalize page after departures", () => {
   const mini = miniFixture();
   const members = Array.from({ length: 11 }, (_, i) => ({ address: `a${i}`, status: "working" }));
-  const cast = Object.fromEntries(members.map((agent, i) => [agent.address, i < 2 ? ["rook", "kestrel"][i] : "husk"]));
+  const cast = Object.fromEntries(members.map((agent, i) => [agent.address, i < 2 ? ["widow", "hawkeye"][i] : "doombot"]));
   const shown = new Set();
   for (let page = 0; page < 3; page++) {
     const squad = mini.battleSquad(members, cast, page);
@@ -356,8 +360,8 @@ test("mini battles respect idle, blocked, done and paused states without arming 
     { address: "a", status: "blocked" }, { address: "b", status: "done" },
     { address: "c", status: "idle" }, { address: "d", status: "working" },
   ];
-  const cast = { a: "rook", b: "meridian", c: "umbra", d: "juno" };
-  assert.equal(mini.battleDialogue(members, cast, 0).text, "I need backup. Holding position!");
+  const cast = { a: "hawkeye", b: "cap", c: "doom", d: "fury" };
+  assert.equal(mini.battleDialogue(members, cast, 0).text, "Avengers, I need backup! Holding position!");
   mini.battleScene("one", members, cast, theme(), { paused: true });
   assert.equal(calls(mini.nodes, "loop").length, 0);
   assert(!mini.nodes.some(node => node.asset?.includes("/weapons/")));
@@ -365,9 +369,9 @@ test("mini battles respect idle, blocked, done and paused states without arming 
   assert(hasText(mini.nodes, "✦"));
   mini.nodes.length = 0;
   const team = [{ address: "r", status: "working" }, { address: "g", status: "working" }];
-  const roles = { r: "rook", g: "kestrel" };
-  assert.equal(mini.battleDialogue(team, roles, 0).speaker, "kestrel");
-  assert.equal(mini.battleDialogue(team, roles, 1).speaker, "rook");
+  const roles = { r: "widow", g: "hawkeye" };
+  assert.equal(mini.battleDialogue(team, roles, 0).speaker, "widow");
+  assert.equal(mini.battleDialogue(team, roles, 1).speaker, "hawkeye");
   mini.battleScene("one", team, roles, theme());
   assert(calls(mini.nodes, "loop").length > 0);
   assertAssets(mini.nodes);
@@ -376,7 +380,7 @@ test("mini battles respect idle, blocked, done and paused states without arming 
 test("agent view keeps per-space controls independent, expands the current squad and skips hidden battles", () => {
   const host = ui();
   const state = { width: 268, visible: true, timers: [], opened: [], commands: [] };
-  const heroes = ["umbra", "meridian", "rook", "kestrel", "juno", "cog", "vesper", "basalt"];
+  const heroes = ["doom", "ironman", "widow", "hawkeye", "fury", "vision", "wanda", "hulk"];
   const list = heroes.map((hero, index) => ({
     address: `a${index}`, status: "working", space: index < 6 ? "one" : "two", space_name: index < 6 ? "One" : "Two",
     tab: `tab${index}`, title: `Task ${index}`, seq: index, pane: `pane${index}`,
@@ -424,7 +428,7 @@ test("agent view keeps per-space controls independent, expands the current squad
   click("fight-squad-one");
   click("fight-open-one");
   assert.equal(state.opened[0].mod, "doomsday-arena");
-  assert.deepEqual(state.opened[0].props, { space: "one", fighters: ["juno", "cog"] });
+  assert.deepEqual(state.opened[0].props, { space: "one", fighters: ["fury", "vision"] });
   assert.equal(state.commands.length, 0);
   state.visible = false;
   tick(cx);

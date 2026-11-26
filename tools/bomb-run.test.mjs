@@ -28,7 +28,7 @@ function harness({ overlay = false, focus = false, storage = new Map(), checking
     nodes: [], timers: [], focused: focus, visible: true, closed: [], commands: [], opened: [],
     ownProps: overlay ? { overlay: "game-overlay" } : { panel: "panel", stack: "panel-body", child: "bomb-run" },
     tree: { id: "root", children: [{ id: "panel", hidden: false, children: [{ id: "panel-body", active: "bomb-run" }] }] },
-    cast: { first: "hexa", second: "nyx" },
+    cast: { first: "panther", second: "widow" },
     agents: [{ address: "first", space: "space-1", focused: true, status: "working", program: { name: "Pi" } },
       { address: "second", space: "space-1", focused: false, status: "idle", program: { name: "Claude Code" } }],
   };
@@ -240,11 +240,11 @@ test("pilot selection uses the real cast and safely resets the run", () => {
   app.click("bomb-run-next-agent");
   assert.equal(app.view.selectedAddress, "second");
   app.render();
-  assert(app.state.nodes.some(node => node.asset?.includes("actors/nyx-down")));
+  assert(app.state.nodes.some(node => node.asset?.includes("actors/widow-down")));
   app.state.cast.second = "not-a-character";
   app.key("enter");
   app.render();
-  assert(app.state.nodes.some(node => node.asset?.includes("actors/meridian-down")));
+  assert(app.state.nodes.some(node => node.asset?.includes("actors/ironman-down")));
 });
 
 test("thermal charges and plasma use local artwork and movement keeps stable actor identities", () => {
@@ -291,7 +291,7 @@ test("a charge destroys a coolant cell and its blast stops there", () => {
 
 test("a blast defeats enemies and awards points", () => {
   const game = newGame();
-  game.enemies = [{ id: 0, hero: "husk", x: 3, y: 1 }];
+  game.enemies = [{ id: 0, hero: "doombot", x: 3, y: 1 }];
   placeBomb(game);
   game.player = { x: 3, y: 3 };
   tick(game, 1800);
@@ -312,12 +312,12 @@ test("the player's own explosion ends the run", () => {
 });
 
 test("pilot and enemies never repeat named characters, even across crowded waves", () => {
-  const heroes = ["umbra", "kestrel", "morrow", "meridian", "vesper", "hexa", "husk",
-    "rook", "basalt", "cog", "aldric", "pip", "juno", "vale", "nyx"];
+  const heroes = ["doom", "spiderman", "strange", "ironman", "wanda", "panther", "doombot",
+    "hawkeye", "hulk", "vision", "thor", "loki", "cap", "widow", "fury"];
   for (const hero of heroes) {
     for (let level = 1; level <= 20; level++) {
       const cast = [hero, ...enemyRoster(hero, 30, level)];
-      const named = cast.filter(id => id !== "husk");
+      const named = cast.filter(id => id !== "doombot");
       assert.equal(new Set(named).size, named.length, `${hero} on deck ${level}`);
       assert(cast.every(id => heroes.includes(id)), "No missing sprites");
       const game = newGame({ hero, level });
@@ -328,8 +328,8 @@ test("pilot and enemies never repeat named characters, even across crowded waves
 });
 
 test("decks change their layout and roster, grow harder, and keep spawn points reachable", () => {
-  const first = newGame({ hero: "umbra" });
-  const second = newGame({ hero: "umbra", level: 2 });
+  const first = newGame({ hero: "doom" });
+  const second = newGame({ hero: "doom", level: 2 });
   assert.notDeepEqual(first.board, second.board);
   assert.notDeepEqual(first.enemies.map(enemy => enemy.hero), second.enemies.map(enemy => enemy.hero));
   for (const level of [1, 2, 3, 5, 9, 20, 9999]) {
@@ -357,14 +357,14 @@ test("decks change their layout and roster, grow harder, and keep spawn points r
 });
 
 test("next deck preserves pilot, XP, score and time but clears hazards and positions", () => {
-  const game = newGame({ hero: "umbra", xp: 600, score: 900, elapsed: 12345 });
+  const game = newGame({ hero: "doom", xp: 600, score: 900, elapsed: 12345 });
   assert.equal(nextLevel(game), game, "Cannot skip a live deck");
   placeBomb(game);
   game.status = "won";
   game.flames.push({ x: 3, y: 3, until: 99999 });
   const next = nextLevel(game);
   assert.equal(next.level, 2);
-  assert.equal(next.hero, "umbra");
+  assert.equal(next.hero, "doom");
   assert.equal(next.xp, 600);
   assert.equal(next.score, 900);
   assert.equal(next.elapsed, 12345);
@@ -411,7 +411,7 @@ test("saved progress is per agent, survives retries and reopening, and unlocks t
   const app = harness({ storage });
   app.view.play(app.cx);
   app.view.game.xp = 195;
-  app.view.game.enemies = [{ id: 0, hero: "husk", x: 3, y: 1 }];
+  app.view.game.enemies = [{ id: 0, hero: "doombot", x: 3, y: 1 }];
   placeBomb(app.view.game);
   app.view.game.player = { x: 3, y: 3 };
   app.view.game.bombs[0].fuse = 1;
@@ -493,7 +493,7 @@ test("a cast change cannot create a duplicate while a mission is already running
   app.view.play(app.cx);
   app.state.cast.first = app.view.game.enemies[1].hero;
   app.render();
-  assert.equal(app.view.game.hero, "hexa", "In-flight pilot is stable");
+  assert.equal(app.view.game.hero, "panther", "In-flight pilot is stable");
   app.key("r"); app.key("enter");
   assert.equal(app.view.game.hero, app.state.cast.first);
   assert(!app.view.game.enemies.some(enemy => enemy.hero === app.view.game.hero));
@@ -608,7 +608,7 @@ test("Echo detonates exactly twice, warns during the delay and postpones victory
   const game = newGame({ xp: 2400, level: 8, payload: "echo" });
   game.board[1].fill(".", 1, WIDTH - 1);
   for (let y = 1; y < HEIGHT - 1; y++) game.board[y][1] = ".";
-  game.enemies = [{ id: 0, hero: "husk", x: 3, y: 1 }];
+  game.enemies = [{ id: 0, hero: "doombot", x: 3, y: 1 }];
   assert(placeBomb(game));
   game.bombs[0].fuse = 1;
   game.player = { x: 3, y: 3 };
@@ -660,7 +660,7 @@ test("Q plants N charges in the facing direction, respecting capacity and obstac
   const empty = newGame({ xp: 2200 });
   assert.equal(placeLine(empty), 0, "Line launcher requires the deck milestone too");
   const app = harness();
-  app.view.game = newGame({ xp: 2200, level: 8, hero: "hexa" });
+  app.view.game = newGame({ xp: 2200, level: 8, hero: "panther" });
   app.view.game.player.facing = "right";
   app.view.play(app.cx); app.key("q");
   assert.equal(app.view.game.bombs.length, 3);
@@ -672,7 +672,7 @@ test("Q plants N charges in the facing direction, respecting capacity and obstac
 
 test("Sprint milestone changes real held-key cadence and native movement to exactly 120 ms", () => {
   const app = harness();
-  app.view.game = newGame({ xp: 1800, level: 7, hero: "hexa" });
+  app.view.game = newGame({ xp: 1800, level: 7, hero: "panther" });
   app.view.play(app.cx); app.key("right");
   assert.equal(app.view.game.player.moveMs, 120);
   app.advanceMs(80);
@@ -718,7 +718,7 @@ test("Thinking only defaults off, so idle agents do not restrict normal training
 
 test("Thinking only freezes the entire game and guards keyboard, buttons and controller entry points", () => {
   const app = harness();
-  app.view.game = newGame({ level: 8, xp: 2400, hero: "hexa" });
+  app.view.game = newGame({ level: 8, xp: 2400, hero: "panther" });
   app.view.play(app.cx); app.key("space"); app.key("right");
   app.view.nextMove = 0;
   app.view.game.echoes = [{ x: 11, y: 9, range: 2, fuse: 500 }];
@@ -932,7 +932,7 @@ test("a visible X always closes the panel or overlay, independently of mission s
 
 test("charges chain when one blast reaches another", () => {
   const game = newGame();
-  game.enemies = [{ id: 0, hero: "husk", x: 5, y: 1 }];
+  game.enemies = [{ id: 0, hero: "doombot", x: 5, y: 1 }];
   game.bombs = [{ x: 1, y: 1, fuse: 1 }, { x: 3, y: 1, fuse: 10000 }];
   tick(game, 1);
   assert.equal(game.bombs.length, 0);

@@ -4,14 +4,14 @@ import { TICK_MS, cyclePayload, deckFor, powerFor, movePlayer, newGame, nextLeve
 import { gamePanel } from "./ui.js";
 
 const NAMES = {
-  umbra: "King Umbra", meridian: "Captain Meridian", vesper: "Vesper", rook: "Rook Calder",
-  basalt: "Basalt", husk: "Husk drone", cog: "Cog", "aldric": "Sir Aldric",
-  pip: "Pip", "kestrel": "Kestrel", juno: "Juno", vale: "Dr. Vale",
-  nyx: "Nyx", "hexa": "Hexa", "morrow": "Morrow",
+  doom: "Doctor Doom", ironman: "Iron Man", cap: "Captain America", thor: "Thor",
+  hulk: "Hulk", widow: "Black Widow", hawkeye: "Hawkeye", spiderman: "Spider-Man",
+  strange: "Doctor Strange", wanda: "Scarlet Witch", panther: "Black Panther",
+  vision: "Vision", loki: "Loki", fury: "Nick Fury", doombot: "Doombot",
 };
 const SHIPS = {
-  "skyrunner": "Skyrunner", "arrowhawk": "Arrowhawk", "nightglass": "Nightglass",
-  "bastion": "Bastion", "longbow": "Longbow", "dart": "Dart", "eclipse-barge": "Eclipse Barge",
+  "skyrunner": "Quinjet", "arrowhawk": "Avenjet", "nightglass": "Royal Talon",
+  "bastion": "Helicarrier", "longbow": "Benatar", "dart": "S.H.I.E.L.D. Dart", "eclipse-barge": "Latverian Barge",
 };
 const MOVES = { up: [0, -1], w: [0, -1], down: [0, 1], s: [0, 1], left: [-1, 0], a: [-1, 0], right: [1, 0], d: [1, 0] };
 const keyOf = event => String(event.key ?? event.keystroke).toLowerCase().replace(/^arrow/, "");
@@ -42,7 +42,7 @@ export function gameVisible(tree, ownProps) {
 
 export function character(agent, cast) {
   const assigned = agent && cast && typeof cast === "object" ? cast[agent.address] : null;
-  return Object.hasOwn(NAMES, assigned) ? assigned : "meridian";
+  return Object.hasOwn(NAMES, assigned) ? assigned : "ironman";
 }
 
 function clock(ms) {

@@ -73,28 +73,28 @@ function icon(p, size, color) {
 }
 
 const CAST = [
-  "meridian", "vesper", "rook", "basalt", "husk", "cog",
-  "aldric", "pip", "kestrel", "juno", "vale", "nyx", "hexa", "morrow",
+  "ironman", "cap", "thor", "hulk", "widow", "hawkeye", "spiderman",
+  "strange", "wanda", "panther", "vision", "loki", "fury", "doombot",
 ];
-const DARK_LORD = "umbra";
+const DARK_LORD = "doom";
 const CAST_KEY = "doomsday-agents.cast";
 const LEGACY_CAST_KEY = "fellowship.cast";
 const HERO_NAMES = {
-  umbra: "King Umbra",
-  meridian: "Captain Meridian",
-  vesper: "Vesper",
-  rook: "Rook Calder",
-  basalt: "Basalt",
-  husk: "Husk drone",
-  cog: "Cog",
-  "aldric": "Sir Aldric",
-  pip: "Pip",
-  "kestrel": "Kestrel",
-  juno: "Juno",
-  vale: "Dr. Vale",
-  nyx: "Nyx",
-  "hexa": "Hexa",
-  "morrow": "Morrow",
+  doom: "Doctor Doom",
+  ironman: "Iron Man",
+  cap: "Captain America",
+  thor: "Thor",
+  hulk: "Hulk",
+  widow: "Black Widow",
+  hawkeye: "Hawkeye",
+  spiderman: "Spider-Man",
+  strange: "Doctor Strange",
+  wanda: "Scarlet Witch",
+  panther: "Black Panther",
+  vision: "Vision",
+  loki: "Loki",
+  fury: "Nick Fury",
+  doombot: "Doombot",
 };
 const MOOD = { working: "On mission", idle: "On standby", done: "Mission complete", blocked: "Needs backup" };
 const MINUTE = 60000;

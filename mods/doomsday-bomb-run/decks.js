@@ -1,42 +1,42 @@
 export const DECKS = [
   {
-    "id": "reactor", "name": "Reactor core", "accent": "#81cdb3", "floor": "#1c3038", "wall": "#38515e", "prop": "console",
-    "hint": "Pylons break the blast. Coolant cells award XP.",
+    "id": "reactor", "name": "Stark Arc Core", "accent": "#5ce6ff", "floor": "#182b3a", "wall": "#345066", "prop": "console",
+    "hint": "Arc pylons block blasts. Energy cells award XP.",
     "layout": ["#############", "#...........#", "#.#.#.#.#.#.#", "#...........#", "#.#.#.#.#.#.#", "#...........#", "#.#.#.#.#.#.#", "#...........#", "#.#.#.#.#.#.#", "#...........#", "#############"]
   },
   {
-    "id": "hangar", "name": "Launch hangar", "accent": "#e4b96c", "floor": "#273440", "wall": "#465b6b", "prop": "barricade",
-    "hint": "Long launch lanes. Watch your flanks between the bays.",
+    "id": "hangar", "name": "Helicarrier Deck", "accent": "#e8bd5a", "floor": "#25323e", "wall": "#455a6b", "prop": "barricade",
+    "hint": "Long flight-deck lanes. Watch your flanks between the Quinjet bays.",
     "layout": ["#############", "#...........#", "#...#####...#", "#...........#", "#.##.....##.#", "#...........#", "#...#####...#", "#...........#", "#.##.....##.#", "#...........#", "#############"]
   },
   {
-    "id": "cryo", "name": "Cryo vault", "accent": "#8dd7ec", "floor": "#183440", "wall": "#386477", "prop": "cryo-pod",
-    "hint": "Frozen aisles funnel the blast. Find a side passage.",
+    "id": "cryo", "name": "Hydra Siberia Lab", "accent": "#82def5", "floor": "#17313f", "wall": "#366075", "prop": "cryo-pod",
+    "hint": "Frozen stasis aisles funnel the blast. Find a side passage.",
     "layout": ["#############", "#...........#", "#.#...#...#.#", "#.#...#...#.#", "#.#...#...#.#", "#...........#", "#...#...#...#", "#...........#", "#...#...#...#", "#...........#", "#############"]
   },
   {
-    "id": "cargo", "name": "Smuggler hold", "accent": "#d8a777", "floor": "#342d30", "wall": "#645149", "prop": "cargo-rack",
-    "hint": "Dense storage racks. Clear the holds one pocket at a time.",
+    "id": "cargo", "name": "Wakanda Vault", "accent": "#c084ff", "floor": "#261f36", "wall": "#4f3d6e", "prop": "cargo-rack",
+    "hint": "Vibranium containment vaults. Clear each chamber one pocket at a time.",
     "layout": ["#############", "#...........#", "#.###...###.#", "#...........#", "#...#.#.#...#", "#.#.......#.#", "#...#.#.#...#", "#...........#", "#.###...###.#", "#...........#", "#############"]
   },
   {
-    "id": "engine", "name": "Ion engines", "accent": "#ef956b", "floor": "#33292d", "wall": "#65454a", "prop": "turbine",
-    "hint": "Engine baffles split the room into close-range corridors.",
+    "id": "engine", "name": "Sanctum Sanctorum", "accent": "#f0a354", "floor": "#332320", "wall": "#694338", "prop": "turbine",
+    "hint": "Relic halls split the Sanctum into tight mystic corridors.",
     "layout": ["#############", "#...........#", "#..#.#.#.#..#", "#..#.....#..#", "#..#.###.#..#", "#...........#", "#..#.###.#..#", "#...........#", "#..#.#.#.#..#", "#...........#", "#############"]
   },
   {
-    "id": "bridge", "name": "Command bridge", "accent": "#b8b2f0", "floor": "#282c43", "wall": "#4e547e", "prop": "terminal",
-    "hint": "A wide command floor with a protected central station.",
+    "id": "bridge", "name": "Avengers Tower", "accent": "#7ab8ff", "floor": "#1f2b42", "wall": "#3f5278", "prop": "terminal",
+    "hint": "High-altitude command floor with a central tactical station.",
     "layout": ["#############", "#...........#", "#..#.....#..#", "#...........#", "#..##...##..#", "#.....#.....#", "#..##...##..#", "#...........#", "#..#.....#..#", "#...........#", "#############"]
   },
   {
-    "id": "detention", "name": "Detention block", "accent": "#b7d09c", "floor": "#273331", "wall": "#4d625b", "prop": "cell-door",
-    "hint": "Cell blocks create short escape routes. Do not trap yourself.",
+    "id": "detention", "name": "The Raft", "accent": "#78d4b5", "floor": "#1c2e2e", "wall": "#3c5957", "prop": "cell-door",
+    "hint": "Undersea cell blocks create short escape routes. Do not trap yourself.",
     "layout": ["#############", "#...........#", "#.##.###.##.#", "#..#.....#..#", "#..#..#..#..#", "#...........#", "#.##.###.##.#", "#...........#", "#..#..#..#..#", "#...........#", "#############"]
   },
   {
-    "id": "foundry", "name": "Droid foundry", "accent": "#f1bd62", "floor": "#382c27", "wall": "#6e5140", "prop": "press",
-    "hint": "Assembly presses leave staggered routes around the machinery.",
+    "id": "foundry", "name": "Castle Doom Foundry", "accent": "#5ce684", "floor": "#1d2a22", "wall": "#3a5443", "prop": "press",
+    "hint": "Doombot assembly forges leave staggered routes around the machinery.",
     "layout": ["#############", "#...........#", "#..###..##..#", "#...........#", "#.##..#..##.#", "#.....#.....#", "#..##...##..#", "#...........#", "#.##..#..##.#", "#...........#", "#############"]
   }
 ];

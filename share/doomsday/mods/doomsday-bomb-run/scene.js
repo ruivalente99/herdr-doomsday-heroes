@@ -73,7 +73,7 @@ export function deckScene(game, options, callbacks) {
   const still = Boolean(waiting) || paused || !started || game.status !== "playing";
   const deck = deckFor(game.level);
   const board = div().id("bomb-run-deck").relative().w(width).h(height).flex_none().overflow_hidden().bg(PALETTE.ink)
-    .accessibility_label(`Pixel-art starship ${deck.name}`)
+    .accessibility_label(`Pixel-art Avengers zone ${deck.name}`)
     .child(image(`${ART}/deck-${deck.id}.svg`).absolute().left(0).top(0).w(width).h(height));
   for (let y = 1; y < HEIGHT - 1; y++) {
     for (let x = 1; x < WIDTH - 1; x++) {

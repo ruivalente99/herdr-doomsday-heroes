@@ -13,8 +13,8 @@ const SPAWNS = [
   { x: 9, y: 1 }, { x: 11, y: 7 }, { x: 3, y: 9 }, { x: 7, y: 9 },
 ];
 const HOSTILES = [
-  "husk", "kestrel", "umbra", "morrow", "basalt", "nyx", "rook",
-  "aldric", "meridian", "vesper", "pip", "hexa", "vale", "cog", "juno",
+  "doombot", "doom", "loki", "wanda", "hulk", "panther", "hawkeye",
+  "thor", "ironman", "cap", "spiderman", "strange", "widow", "vision", "fury",
 ];
 const RANKS = [
   { xp: 0, title: "Cadet" }, { xp: 200, title: "Scout" }, { xp: 600, title: "Veteran" },
@@ -83,12 +83,12 @@ export function deckFor(level) {
   return DECKS[(normalizeProfile({ level }).level - 1) % DECKS.length];
 }
 
-// The pilot counts toward uniqueness. Only unnamed Husk drones may repeat.
+// The pilot counts toward uniqueness. Only unnamed Doombots may repeat.
 export function enemyRoster(hero, count, level = 1) {
   const offset = (normalizeProfile({ level }).level - 1) * 3 % HOSTILES.length;
   const candidates = HOSTILES.map((_, index) => HOSTILES[(index + offset) % HOSTILES.length])
-    .filter(candidate => candidate !== hero || candidate === "husk");
-  return Array.from({ length: count }, (_, index) => candidates[index] ?? "husk");
+    .filter(candidate => candidate !== hero || candidate === "doombot");
+  return Array.from({ length: count }, (_, index) => candidates[index] ?? "doombot");
 }
 
 const inside = (x, y) => x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT;
@@ -98,7 +98,7 @@ const onFlame = (game, point) => game.flames.some(flame => same(flame, point) &&
 export function newGame(options = {}) {
   const { level, xp } = normalizeProfile(options);
   const deck = deckFor(level);
-  const hero = HOSTILES.includes(options.hero) ? options.hero : "meridian";
+  const hero = HOSTILES.includes(options.hero) ? options.hero : "ironman";
   const enemyTotal = Math.min(SPAWNS.length, 4 + Math.floor((level - 1) / 2));
   const roster = enemyRoster(hero, enemyTotal, level);
   const spawns = SPAWNS.slice(0, enemyTotal);

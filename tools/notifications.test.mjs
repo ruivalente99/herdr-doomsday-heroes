@@ -98,17 +98,17 @@ test("active Herdr windows, checks and missing windows never send system banners
 
 test("character-aware background alerts keep their attribution and use the Herdr click target", async () => {
   const { state, view } = fixture({
-    cast: { a1: "meridian" },
+    cast: { a1: "cap" },
     payload: { title: "pi finished", body: "Task complete", action: { name: "agent.focus", args: { terminal: "a1" } } },
   });
   view.init();
   await flush();
   assert.deepEqual(state.executions[0], {
     command: "terminal-notifier",
-    args: ["-title", "Captain Meridian has completed the mission", "-message", "pi · Task complete", "-activate", "dev.herdr.app"],
+    args: ["-title", "Captain America has completed the mission", "-message", "pi · Task complete", "-activate", "dev.herdr.app"],
   });
   view.render({});
-  assert(state.nodes.some(node => node.asset === "mods/doomsday-agents/sprites/doomsday/meridian.svg"));
+  assert(state.nodes.some(node => node.asset === "mods/doomsday-agents/sprites/doomsday/cap.svg"));
 });
 
 test("macOS optional banner images remain separate command arguments", async () => {
