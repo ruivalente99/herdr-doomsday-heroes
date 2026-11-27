@@ -148,11 +148,12 @@
                       "title": "Bomb Run",
                       "type": "block",
                       "content": {
-                        "mod": "doomsday-bomb-run",
+                        "mod": "bomb-run",
                         "props": {
                           "panel": "panel",
                           "stack": "panel-body",
-                          "child": "bomb-run"
+                          "child": "bomb-run",
+                          "override": "mods/doomsday-tabs/bomb-run-override.json"
                         }
                       }
                     }

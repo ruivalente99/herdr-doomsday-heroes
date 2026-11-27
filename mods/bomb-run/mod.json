@@ -1,6 +1,6 @@
 {
   "place": "none",
-  "title": "Doomsday Heroes · Bomb Run",
+  "title": "Bomb Run",
   "overlay": {
     "kind": "dialog",
     "width": 720,
@@ -8,10 +8,10 @@
   },
   "palette": [
     {
-      "title": "Doomsday Heroes: Bomb Run",
+      "title": "Bomb Run",
       "command": "mod.open",
       "args": {
-        "name": "doomsday-bomb-run"
+        "name": "bomb-run"
       },
       "words": "bomberman bombs maze arcade game mini-game agents"
     }

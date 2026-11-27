@@ -6,7 +6,7 @@ REPO="$(cd "$(dirname "$0")" && pwd)"
 HERDR_HOME="${HERDR_APP_HOME:-$HOME/.config/herdr-app}"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP="$HERDR_HOME/backups/doomsday-$STAMP"
-MODS="doomsday-agents doomsday-alerts doomsday-status doomsday-systems doomsday-arena doomsday-bomb-run doomsday-tabs"
+MODS="doomsday-agents doomsday-alerts doomsday-status doomsday-systems doomsday-arena bomb-run doomsday-tabs"
 
 fail() { echo "install.sh: $*" >&2; exit 1; }
 command -v herdr-app >/dev/null 2>&1 || fail "herdr-app is not on PATH. Install Herdr and try again."
