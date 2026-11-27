@@ -1,86 +1,17 @@
+// Synced from herdr-common (mods/agents/battle.js). Do not edit directly; edit pack.config.mjs and run sync.
 import { div, image } from "gpui-kit";
 import { h_flex } from "gpui-base";
 import { settings, shared, layout } from "herdr";
+import { AGENTS_CONFIG } from "./config.js";
 
-const SPRITE_DIR = "mods/doomsday-agents/sprites/doomsday";
+const SPRITE_DIR = AGENTS_CONFIG.spriteDir;
 const WEAPON_DIR = `${SPRITE_DIR}/weapons`;
 export const SPRITE_SIZE = 36;
-const MELEE_WEAPONS = new Set([
-  "shield", "mjolnir", "smash", "baton", "claw", "scepter",
-  "ten-rings", "jabari-staff", "katana", "elastic", "rock-smash",
-  "metal-arm", "us-shield", "red-shield", "phase-strike", "beast-claw",
-  "bamf-blade", "trident",
-]);
-const RANGED_WEAPONS = new Set([
-  "repulsor", "arrow", "web", "mind-beam", "doom-blast",
-  "pym-disc", "wing-blade", "flame", "optic-blast", "kinetic-card", "pistol",
-]);
-const DUAL_HEROES = new Set(["widow", "panther", "yelena", "deadpool", "shangchi"]);
-const ACROBAT_HEROES = new Set(["spiderman", "nightcrawler", "deadpool", "mystique", "antman", "cassie", "ghost", "gambit"]);
-const FLYER_HEROES = new Set(["ironman", "sam", "falcon", "humantorch", "sentry", "namor"]);
-const WEAPONS = {
-  doom: "doom-magic", ironman: "repulsor", cap: "shield", thor: "mjolnir",
-  hulk: "smash", widow: "baton", hawkeye: "arrow", spiderman: "web",
-  strange: "eldritch", wanda: "chaos", panther: "claw", vision: "mind-beam",
-  loki: "scepter", fury: null, doombot: "doom-blast",
-  sam: "shield", antman: "pym-disc", cassie: "pym-disc", shangchi: "ten-rings",
-  mbaku: "jabari-staff", falcon: "wing-blade", peggy: "pistol", deadpool: "katana",
-  mrfantastic: "elastic", invisiblewoman: "force-field", humantorch: "flame", thing: "rock-smash",
-  yelena: "baton", bucky: "metal-arm", usagent: "us-shield", redguardian: "red-shield",
-  sentry: "solar-flare", ghost: "phase-strike",
-  professorx: "psychic", magneto: "magnetism", cyclops: "optic-blast", beast: "beast-claw",
-  gambit: "kinetic-card", mystique: "pistol", nightcrawler: "bamf-blade", namor: "trident",
-};
-const NAMES = {
-  doom: "Doctor Doom", ironman: "Iron Man", cap: "Captain America", thor: "Thor",
-  hulk: "Hulk", widow: "Black Widow", hawkeye: "Hawkeye", spiderman: "Spider-Man",
-  strange: "Doctor Strange", wanda: "Scarlet Witch", panther: "Black Panther",
-  vision: "Vision", loki: "Loki", fury: "Nick Fury", doombot: "Doombot",
-  sam: "Sam Wilson", antman: "Ant-Man", cassie: "Cassie Lang", shangchi: "Shang-Chi",
-  mbaku: "M'Baku", falcon: "Falcon", peggy: "Peggy Carter", deadpool: "Deadpool",
-  mrfantastic: "Mister Fantastic", invisiblewoman: "Invisible Woman", humantorch: "Human Torch", thing: "The Thing",
-  yelena: "Yelena Belova", bucky: "Winter Soldier", usagent: "U.S. Agent", redguardian: "Red Guardian",
-  sentry: "Sentry", ghost: "Ghost",
-  professorx: "Professor X", magneto: "Magneto", cyclops: "Cyclops", beast: "Beast",
-  gambit: "Gambit", mystique: "Mystique", nightcrawler: "Nightcrawler", namor: "Namor",
-};
-const SHIPS = new Set(["skyrunner", "arrowhawk", "nightglass", "bastion", "longbow", "dart", "eclipse-barge"]);
-const CONVERSATIONS = [
-  { pair: ["doom", "ironman"], lines: [["doom", "A tin suit against Latveria's sovereign? How quaint."], ["ironman", "Says the guy wearing a medieval cosplay helmet."]] },
-  { pair: ["cap", "ironman"], lines: [["ironman", "Big man in a suit of armor. Take that off, what are you?"], ["cap", "Still standing when the build breaks."]] },
-  { pair: ["thor", "hulk"], lines: [["thor", "Strongest Avenger reporting in."], ["hulk", "Hulk strongest! Point break wrong!"]] },
-  { pair: ["thor", "loki"], lines: [["loki", "I have been falling for thirty minutes!"], ["thor", "Stop turning into snakes and help me deploy."]] },
-  { pair: ["widow", "hawkeye"], lines: [["widow", "Just like Budapest all over again."], ["hawkeye", "You and I remember Budapest very differently."]] },
-  { pair: ["spiderman", "ironman"], lines: [["spiderman", "Mr. Stark, I found a bug in the training sim!"], ["ironman", "Kid, stay on your feet and keep the webs off my visor."]] },
-  { pair: ["strange", "wanda"], lines: [["strange", "The multiverse is not a playground, Wanda."], ["wanda", "You break the rules and become a hero. I do it and it's a warning."]] },
-  { pair: ["strange", "doom"], lines: [["doom", "Your mystic trinkets pale before Doom's sorcery."], ["strange", "I've bargained with worse than you, Victor."]] },
-  { pair: ["cap", "panther"], lines: [["panther", "Your shield holds up well, Captain."], ["cap", "Wakanda makes good gear. Try not to scratch it."]] },
-  { pair: ["wanda", "vision"], lines: [["vision", "Our odds improve markedly when we synchronize."], ["wanda", "Then stay close, Vis."]] },
-  { pair: ["fury", "ironman"], lines: [["fury", "Stark, I need results, not sarcasm."], ["ironman", "You hired me for both, Director."]] },
-  { pair: ["spiderman", "strange"], lines: [["spiderman", "Oh, we're using our made-up names! I'm Spider-Man."], ["strange", "Focus, Parker. Portal on your left."]] },
-  { pair: ["doom", "cap"], lines: [["doom", "Kneel, Captain. Doomsday has already begun."], ["cap", "I can do this all day."]] },
-  { pair: ["panther", "widow"], lines: [["widow", "Try to keep up, Your Highness."], ["panther", "I never freeze, Romanoff."]] },
-  { pair: ["doom", "mrfantastic"], lines: [["doom", "Richards! Your equations were flawed from the start."], ["mrfantastic", "Give it up, Victor. Check your boundary conditions."]] },
-  { pair: ["mrfantastic", "invisiblewoman"], lines: [["invisiblewoman", "Reed, eyes off the chalkboard and on the flank."], ["mrfantastic", "Right! Force field at twelve o'clock."]] },
-  { pair: ["humantorch", "thing"], lines: [["humantorch", "Flame on! Try to keep up, rock-head!"], ["thing", "Watch the paint, Matchstick — it's clobberin' time!"]] },
-  { pair: ["professorx", "magneto"], lines: [["magneto", "Still lecturing from the high road, old friend?"], ["professorx", "Only until you stop bending the bulkheads, Erik."]] },
-  { pair: ["cyclops", "gambit"], lines: [["cyclops", "Keep your cards off the console, Remy."], ["gambit", "Relax, mon ami — Gambit never misses the ante."]] },
-  { pair: ["beast", "nightcrawler"], lines: [["beast", "Fascinating teleportation vector, Kurt!"], ["nightcrawler", "Bamf! Just don't ask me to write the math down, Hank."]] },
-  { pair: ["magneto", "mystique"], lines: [["magneto", "Infiltration complete, Raven?"], ["mystique", "They never even saw who opened the airlock."]] },
-  { pair: ["yelena", "redguardian"], lines: [["redguardian", "Look at us! Family back on mission together!"], ["yelena", "Alexei, please stop yelling on open comms."]] },
-  { pair: ["yelena", "bucky"], lines: [["yelena", "Nice arm. Very shiny. Does it have pockets?"], ["bucky", "Focus on the breach, Belova."]] },
-  { pair: ["bucky", "sam"], lines: [["sam", "On your left, Bucky. Don't drop the pace."], ["bucky", "You're never letting that line go, are you?"]] },
-  { pair: ["sam", "falcon"], lines: [["falcon", "Wings locked and Redwing online, Cap!"], ["sam", "Stay tight on my wing, Joaquin."]] },
-  { pair: ["cap", "peggy"], lines: [["peggy", "Late again, Rogers. Still owe me that dance."], ["cap", "Right after we wrap this deployment, Peggy."]] },
-  { pair: ["antman", "cassie"], lines: [["antman", "Stay big — wait, stay small! Just stay safe!"], ["cassie", "Relax, Dad, I've got the Pym discs dialed in."]] },
-  { pair: ["panther", "mbaku"], lines: [["mbaku", "Jabari warriors do not wait for slow builds!"], ["panther", "Then stop talking and hold the left flank, M'Baku."]] },
-  { pair: ["panther", "namor"], lines: [["namor", "Surface dwellers test my patience again."], ["panther", "Wakanda and Talokan finish the mission first, Namor."]] },
-  { pair: ["usagent", "bucky"], lines: [["usagent", "I can handle point on this run, Barnes."], ["bucky", "Just stay out of my line of fire, Walker."]] },
-  { pair: ["sentry", "ghost"], lines: [["ghost", "Try not to blind the whole deck, Bob."], ["sentry", "Keeping it dialed way down. Promise."]] },
-  { pair: ["deadpool", "gambit"], lines: [["deadpool", "Woo! I'm about to make a name for myself in this terminal!"], ["gambit", "Careful, Wade — dat's my line, chère."]] },
-  { pair: ["deadpool", "doom"], lines: [["deadpool", "Wait — Tony?! Did the budget cover two masks?"], ["doom", "Silence, jester, before Doom vaporizes your fourth wall."]] },
-  { pair: ["shangchi", "thor"], lines: [["shangchi", "Nice hammer. Ever spar against the Ten Rings?"], ["thor", "A worthy challenge! Show me your stance!"]] },
-];
+
+const HEROES = AGENTS_CONFIG.heroes;
+const LOCATIONS = new Set(AGENTS_CONFIG.locations);
+const UNDIRECTED = new Set(AGENTS_CONFIG.undirectedWeapons ?? []);
+const CONVERSATIONS = AGENTS_CONFIG.battle.conversations;
 
 export function find(node, id) {
   if (node?.id === id) return node;
@@ -105,23 +36,23 @@ export function heroSprite(hero, status, t) {
 }
 
 export function battleSquad(members, cast, page = 0, capacity = 4) {
-  const eligible = members.filter(agent => Object.hasOwn(NAMES, cast[agent.address]));
+  const eligible = members.filter((agent) => Object.hasOwn(HEROES, cast[agent.address]));
   const pages = Math.max(1, Math.ceil(eligible.length / capacity));
   const current = ((page % pages) + pages) % pages;
   return { fighters: eligible.slice(current * capacity, (current + 1) * capacity), page: current, pages, total: eligible.length };
 }
 
 export function battleDialogue(fighters, cast, turn = 0) {
-  const present = new Set(fighters.map(agent => cast[agent.address]));
+  const present = new Set(fighters.map((agent) => cast[agent.address]));
   const lines = [];
-  const blocked = fighters.find(agent => agent.status === "blocked");
-  const done = fighters.find(agent => agent.status === "done");
-  if (blocked) lines.push([cast[blocked.address], "Avengers, I need backup! Holding position!"]);
-  else if (done) lines.push([cast[done.address], "Mission complete. Bringing the team home."]);
-  lines.push(...CONVERSATIONS.filter(({ pair }) => pair.every(hero => present.has(hero))).flatMap(({ lines }) => lines));
+  const blocked = fighters.find((agent) => agent.status === "blocked");
+  const done = fighters.find((agent) => agent.status === "done");
+  if (blocked) lines.push([cast[blocked.address], AGENTS_CONFIG.battle.blockedLine]);
+  else if (done) lines.push([cast[done.address], AGENTS_CONFIG.battle.doneLine]);
+  lines.push(...CONVERSATIONS.filter(({ pair }) => pair.every((hero) => present.has(hero))).flatMap(({ lines: pairLines }) => pairLines));
   if (!lines.length && fighters.length) {
-    lines.push([cast[fighters[0].address], "Avengers, check in. Ready for the next run?"]);
-    if (fighters[1]) lines.push([cast[fighters[1].address], "On your left. Whatever it takes."]);
+    lines.push([cast[fighters[0].address], AGENTS_CONFIG.battle.fallbackLines[0]]);
+    if (fighters[1]) lines.push([cast[fighters[1].address], AGENTS_CONFIG.battle.fallbackLines[1]]);
   }
   const [speaker, text] = lines[((turn % lines.length) + lines.length) % lines.length] ?? [];
   return { speaker, text };
@@ -132,26 +63,30 @@ function pulse(element, paused, property, from, to, period) {
 }
 
 function miniFighter(agent, hero, x, facing, paused, hasTarget, t) {
+  const profile = HEROES[hero];
   const active = hasTarget && (!agent.status || agent.status === "working");
-  const weapon = WEAPONS[hero];
-  const melee = MELEE_WEAPONS.has(weapon);
+  const weapon = profile.weapon;
+  const melee = profile.weaponKind === "melee";
   const period = melee ? 1520 : 1180;
   const direction = facing === "right" ? 1 : -1;
   const body = div().relative().left(0).top(0).w(28).h(28)
     .child(image(`${SPRITE_DIR}/${hero}.svg`).w(28).h(28));
   if (active && weapon) {
-    const asset = `${weapon}-${facing}`;
+    const asset = UNDIRECTED.has(weapon) ? weapon : `${weapon}-${facing}`;
     body.child(image(`${WEAPON_DIR}/${asset}.svg`).w(24).h(12).absolute().top(13)
       .left(facing === "right" ? 16 : -12));
-    if (DUAL_HEROES.has(hero)) body.child(image(`${WEAPON_DIR}/${asset}.svg`).w(20).h(10)
+    if (profile.style === "dual") body.child(image(`${WEAPON_DIR}/${asset}.svg`).w(20).h(10)
       .absolute().top(20).left(facing === "right" ? 14 : -6));
   }
-  const dx = !active ? 0 : melee ? direction * 5 : direction * -1;
-  const dy = active && ACROBAT_HEROES.has(hero) ? -5 : active && FLYER_HEROES.has(hero) ? -3 : agent.status === "done" ? -2 : 0;
+  const dx = !active ? 0 : melee ? direction * 5 : profile.style === "droid" ? direction * 2 : direction * -1;
+  const dy = active && profile.miniDy != null ? profile.miniDy
+    : active && profile.style === "acrobat" ? -5
+    : active && profile.style === "jetpack" ? -3
+    : agent.status === "done" ? -2 : 0;
   return div().id(`fight-${agent.address}`).absolute().left(x).top(4).w(28).h(28)
-    .tooltip(`${NAMES[hero]} · ${agent.status ?? "working"}`)
+    .tooltip(`${profile.battleName} · ${agent.status ?? "working"}`)
     .child(pulse(pulse(body, paused, "left", 0, dx, period), paused, "top", 0, dy, period))
-    .when(agent.status === "blocked" || agent.status === "done", el => el.child(div().absolute().right(-2).top(0)
+    .when(agent.status === "blocked" || agent.status === "done", (el) => el.child(div().absolute().right(-2).top(0)
       .text_size(9).font_bold().text_color(agent.status === "blocked" ? t.blocked : t.done)
       .child(agent.status === "blocked" ? "!" : "✦")));
 }
@@ -159,7 +94,7 @@ function miniFighter(agent, hero, x, facing, paused, hasTarget, t) {
 function miniButton(id, text, t, action) {
   return div().id(id).px(5).h(19).rounded(3).flex().items_center().justify_center()
     .text_size(9).text_color(t.muted).cursor_pointer().role("button")
-    .accessibility_label(text).hover(el => el.bg(t.hover)).on_click(action).child(text);
+    .accessibility_label(text).hover((el) => el.bg(t.hover)).on_click(action).child(text);
 }
 
 function speechTail(id, center, t) {
@@ -181,35 +116,37 @@ export function battleScene(space, members, cast, t, options = {}) {
   const width = Math.max(120, sidebarWidth - 46);
   const laneWidth = width / columns;
   const { speaker, text } = battleDialogue(squad.fighters, cast, turn);
-  const ship = shared("doomsday.ships")?.[space];
-  const speakerIndex = Math.max(0, squad.fighters.findIndex(agent => cast[agent.address] === speaker));
+  const loc = shared(AGENTS_CONFIG.locationsSharedKey)?.[space];
+  const speakerIndex = Math.max(0, squad.fighters.findIndex((agent) => cast[agent.address] === speaker));
   const speakerPair = Math.floor(speakerIndex / 2);
   const solo = speakerPair * 2 + 1 >= squad.fighters.length;
   const tailCenter = Math.max(12, Math.min(width - 12,
-    1 + speakerPair % columns * laneWidth + laneWidth / 2 + (solo ? 0 : speakerIndex % 2 ? 28 : -28)));
+    1 + (speakerPair % columns) * laneWidth + laneWidth / 2 + (solo ? 0 : speakerIndex % 2 ? 28 : -28)));
   const height = 20 + rows * 36 + (text ? 42 : 0) + (onOpen ? 21 : 0);
   const stage = div().id(`fight-${space}`).relative().flex().flex_col().overflow_hidden()
     .h(height + 2).mx(5).my(3).flex_none().rounded(6).bg(t.raised).border(1).border_color(t.border);
   const field = div().id(`fight-field-${space}`).relative().h(20 + rows * 36).flex_none().overflow_hidden();
-  if (SHIPS.has(ship)) {
-    stage.child(image(`backgrounds/ships/${settings().dark === false ? "vanguard" : "eclipse"}/${ship}.png`)
+  if (LOCATIONS.has(loc)) {
+    const side = settings().dark === false ? AGENTS_CONFIG.themes.light : AGENTS_CONFIG.themes.dark;
+    stage.child(image(`${AGENTS_CONFIG.backgroundDir}/${side}/${loc}.png`)
       .absolute().left(0).top(0).w_full().h(Math.max(height, sidebarWidth * 9 / 16)).opacity(0.25));
   }
   field.child(div().absolute().left(6).right(6).top(4).text_size(8).font_semibold().text_color(t.dim)
-    .child(`${paused ? "PAUSED" : "TRAINING"} / ${fronts} FRONTS · ${squad.fighters.length}/${squad.total} AGENTS`));
+    .child(`${paused ? AGENTS_CONFIG.battle.pausedLabel : AGENTS_CONFIG.battle.activeLabel} / ${fronts} FRONTS · ${squad.fighters.length}/${squad.total} ${AGENTS_CONFIG.battle.unitPluralUpper}`));
+  const boltColor = t[AGENTS_CONFIG.battle.rangedBoltColor] ?? t.accent;
   for (let index = 0; index < fronts; index++) {
     const pair = squad.fighters.slice(index * 2, index * 2 + 2);
     const lane = div().id(`fight-${space}-front-${index}`).absolute()
-      .left(6 + index % columns * laneWidth).top(20 + Math.floor(index / columns) * 36).w(laneWidth).h(36);
+      .left(6 + (index % columns) * laneWidth).top(20 + Math.floor(index / columns) * 36).w(laneWidth).h(36);
     pair.forEach((agent, slot) => {
       const x = pair.length === 1 ? laneWidth / 2 - 14 : laneWidth / 2 + (slot ? 14 : -42);
       lane.child(miniFighter(agent, cast[agent.address], x, slot ? "left" : "right", paused, pair.length === 2, t));
     });
-    const attacking = pair.some(agent => (!agent.status || agent.status === "working") && WEAPONS[cast[agent.address]]);
-    const ranged = pair.some(agent => (!agent.status || agent.status === "working")
-      && RANGED_WEAPONS.has(WEAPONS[cast[agent.address]]));
+    const attacking = pair.some((agent) => (!agent.status || agent.status === "working") && HEROES[cast[agent.address]]?.weapon);
+    const ranged = pair.some((agent) => (!agent.status || agent.status === "working")
+      && HEROES[cast[agent.address]]?.weaponKind === "ranged");
     if (pair.length === 2 && ranged) lane.child(pulse(div().absolute().left(laneWidth / 2 - 9).top(18)
-      .w(18).h(2).bg(t.accent), paused, "opacity", 0.1, 0.9, 1180));
+      .w(18).h(2).bg(boltColor), paused, "opacity", 0.1, 0.9, 1180));
     if (pair.length === 2 && attacking) {
       lane.child(pulse(div().absolute().left(laneWidth / 2 - 3).top(15).size(7)
         .text_size(10).text_color(t.working).child("✦"), paused, "opacity", 0, 1, 1520));
@@ -217,16 +154,19 @@ export function battleScene(space, members, cast, t, options = {}) {
     field.child(lane);
   }
   stage.child(field);
-  if (text) stage.child(div().id(`fight-comms-${space}`).relative().mx(5).mt(2).h(40).flex_none().overflow_hidden()
-    .tooltip(`${NAMES[speaker]}: ${text}`).accessibility_label(`${NAMES[speaker]} says: ${text}`)
-    .child(div().id(`fight-bubble-${space}`).absolute().left(0).right(0).top(6).h(34)
-      .px(7).py(2).rounded(8).border(1).border_color(t.border).bg(t.popover)
-      .child(div().text_size(8).font_semibold().text_color(t.accent).child(NAMES[speaker]))
-      .child(div().text_size(10).text_color(t.foreground).truncate().child(text)))
-    .child(speechTail(`fight-tail-${space}`, tailCenter, t)));
+  if (text) {
+    const speakerName = HEROES[speaker]?.battleName ?? speaker;
+    stage.child(div().id(`fight-comms-${space}`).relative().mx(5).mt(2).h(40).flex_none().overflow_hidden()
+      .tooltip(`${speakerName}: ${text}`).accessibility_label(`${speakerName} says: ${text}`)
+      .child(div().id(`fight-bubble-${space}`).absolute().left(0).right(0).top(6).h(34)
+        .px(7).py(2).rounded(8).border(1).border_color(t.border).bg(t.popover)
+        .child(div().text_size(8).font_semibold().text_color(t.accent).child(speakerName))
+        .child(div().text_size(10).text_color(t.foreground).truncate().child(text)))
+      .child(speechTail(`fight-tail-${space}`, tailCenter, t)));
+  }
   if (onOpen) stage.child(h_flex().relative().mx(4).mt(1).h(20).flex_none().items_center().gap(2)
     .child(miniButton(`fight-pause-${space}`, paused ? "Resume" : "Pause", t, onPause))
-    .when(squad.pages > 1, el => el.child(miniButton(`fight-squad-${space}`, `Squad ${squad.page + 1}/${squad.pages} ›`, t, onPage)))
+    .when(squad.pages > 1, (el) => el.child(miniButton(`fight-squad-${space}`, `Squad ${squad.page + 1}/${squad.pages} ›`, t, onPage)))
     .child(div().flex_1())
     .child(miniButton(`fight-open-${space}`, "Expand ↗", t, () => onOpen(squad.fighters))));
   return stage;
