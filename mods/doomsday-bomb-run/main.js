@@ -8,6 +8,13 @@ const NAMES = {
   hulk: "Hulk", widow: "Black Widow", hawkeye: "Hawkeye", spiderman: "Spider-Man",
   strange: "Doctor Strange", wanda: "Scarlet Witch", panther: "Black Panther",
   vision: "Vision", loki: "Loki", fury: "Nick Fury", doombot: "Doombot",
+  sam: "Sam Wilson", antman: "Ant-Man", cassie: "Cassie Lang", shangchi: "Shang-Chi",
+  mbaku: "M'Baku", falcon: "Falcon", peggy: "Peggy Carter", deadpool: "Deadpool",
+  mrfantastic: "Mister Fantastic", invisiblewoman: "Invisible Woman", humantorch: "Human Torch", thing: "The Thing",
+  yelena: "Yelena Belova", bucky: "Winter Soldier", usagent: "U.S. Agent", redguardian: "Red Guardian",
+  sentry: "Sentry", ghost: "Ghost",
+  professorx: "Professor X", magneto: "Magneto", cyclops: "Cyclops", beast: "Beast",
+  gambit: "Gambit", mystique: "Mystique", nightcrawler: "Nightcrawler", namor: "Namor",
 };
 const SHIPS = {
   "skyrunner": "Quinjet", "arrowhawk": "Avenjet", "nightglass": "Royal Talon",

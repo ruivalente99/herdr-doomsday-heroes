@@ -127,8 +127,8 @@ export default class Arena extends View {
         .when(this.scenario === "custom", el => el.child(v_flex().flex_none().gap(4)
           .child(div().text_size(10).text_color(t.dim)
             .child(`${this.custom.length}/8 fighters · pick 2–8 · selection order defines pairs · an odd fighter stays on standby`))
-          .child(h_flex().gap(4).children(heroes.slice(0, 8).map(chip)))
-          .child(h_flex().gap(4).children(heroes.slice(8).map(chip)))))
+          .children(Array.from({ length: Math.ceil(heroes.length / 8) }, (_, row) =>
+            h_flex().gap(4).children(heroes.slice(row * 8, row * 8 + 8).map(chip))))))
         .child(h_flex().justify_center().flex_none()
           .child(arena(options, ship, t, dark, SHIP_NAMES, (index, cx) => {
             this.focus = this.focus === index ? null : index;

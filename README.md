@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/characters-15-6eaa8f?style=flat-square" alt="15 characters">
+  <img src="https://img.shields.io/badge/characters-41-6eaa8f?style=flat-square" alt="41 characters">
   <img src="https://img.shields.io/badge/ships-7-a8875a?style=flat-square" alt="7 ships">
   <img src="https://img.shields.io/badge/appearances-2-4c96b5?style=flat-square" alt="2 appearances">
 </p>
@@ -52,7 +52,7 @@ One layout, two coordinated appearances:
 | Vanguard | Eclipse |
 | --- | --- |
 | Ivory surfaces, blue accents and warm cockpit lighting. | Charcoal surfaces, muted red accents and darker cockpits. |
-| 14 available Avengers & Doombots. | The same roster, with Doctor Doom joining the cast. |
+| 40 available Avengers, Fantastic Four, Thunderbolts, X-Men & Doombots. | The same roster, with Doctor Doom joining the cast. |
 
 The layout follows system appearance until you select a side. Use **Doomsday Heroes: Vanguard** or **Doomsday Heroes: Eclipse** in the command palette, or run:
 
@@ -86,6 +86,7 @@ Every ship has both appearances: **Quinjet, Avenjet, Royal Talon, Helicarrier, B
 <p align="center">
   <img src="mods/doomsday-agents/sprites/doomsday/ironman.svg" alt="Iron Man" width="40">
   <img src="mods/doomsday-agents/sprites/doomsday/cap.svg" alt="Captain America" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/sam.svg" alt="Sam Wilson" width="40">
   <img src="mods/doomsday-agents/sprites/doomsday/thor.svg" alt="Thor" width="40">
   <img src="mods/doomsday-agents/sprites/doomsday/hulk.svg" alt="Hulk" width="40">
   <img src="mods/doomsday-agents/sprites/doomsday/widow.svg" alt="Black Widow" width="40">
@@ -97,11 +98,38 @@ Every ship has both appearances: **Quinjet, Avenjet, Royal Talon, Helicarrier, B
   <img src="mods/doomsday-agents/sprites/doomsday/vision.svg" alt="Vision" width="40">
   <img src="mods/doomsday-agents/sprites/doomsday/loki.svg" alt="Loki" width="40">
   <img src="mods/doomsday-agents/sprites/doomsday/fury.svg" alt="Nick Fury" width="40">
+  <br>
+  <img src="mods/doomsday-agents/sprites/doomsday/antman.svg" alt="Ant-Man" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/cassie.svg" alt="Cassie Lang" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/shangchi.svg" alt="Shang-Chi" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/mbaku.svg" alt="M'Baku" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/falcon.svg" alt="Falcon" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/peggy.svg" alt="Peggy Carter" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/deadpool.svg" alt="Deadpool" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/mrfantastic.svg" alt="Mister Fantastic" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/invisiblewoman.svg" alt="Invisible Woman" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/humantorch.svg" alt="Human Torch" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/thing.svg" alt="The Thing" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/namor.svg" alt="Namor" width="40">
+  <br>
+  <img src="mods/doomsday-agents/sprites/doomsday/yelena.svg" alt="Yelena Belova" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/bucky.svg" alt="Winter Soldier" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/usagent.svg" alt="U.S. Agent" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/redguardian.svg" alt="Red Guardian" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/sentry.svg" alt="Sentry" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/ghost.svg" alt="Ghost" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/professorx.svg" alt="Professor X" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/magneto.svg" alt="Magneto" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/cyclops.svg" alt="Cyclops" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/beast.svg" alt="Beast" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/gambit.svg" alt="Gambit" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/mystique.svg" alt="Mystique" width="40">
+  <img src="mods/doomsday-agents/sprites/doomsday/nightcrawler.svg" alt="Nightcrawler" width="40">
   <img src="mods/doomsday-agents/sprites/doomsday/doombot.svg" alt="Doombot" width="40">
   <img src="mods/doomsday-agents/sprites/doomsday/doom.svg" alt="Doctor Doom" width="40">
 </p>
 
-Iron Man, Captain America, Thor, Hulk, Black Widow, Hawkeye, Spider-Man, Doctor Strange, Scarlet Witch, Black Panther, Vision, Loki, Nick Fury and Doombot are available in both appearances. Doctor Doom joins on the Eclipse.
+40 heroes and Doombots across the **Avengers** (Iron Man, Captain America, Sam Wilson, Thor, Hulk, Black Widow, Hawkeye, Spider-Man, Doctor Strange, Scarlet Witch, Black Panther, Vision, Loki, Nick Fury, Ant-Man, Cassie Lang, Shang-Chi, M'Baku, Falcon, Peggy Carter, Deadpool, Namor), **Fantastic Four** (Mister Fantastic, Invisible Woman, Human Torch, The Thing), **Thunderbolts** (Yelena Belova, Winter Soldier, U.S. Agent, Red Guardian, Sentry, Ghost), and **X-Men & Mutants** (Professor X, Magneto, Cyclops, Beast, Gambit, Mystique, Nightcrawler) are available in both appearances. **Doctor Doom** joins on the Eclipse.
 
 Characters stay unique across agents; extra agents receive Doombots after the other available characters are assigned.
 
@@ -124,8 +152,8 @@ Each space has its own **Pause** control. Use **Squad** to page through larger g
 
 A separate training scene, with no commands sent to real agents.
 
-1. **Build a matchup.** Choose **Avengers**, **Doomsday**, **Strike team** or **Council**, or pick **Custom** and select 2–8 fighters from the full cast. Selection order defines pairs; an odd fighter stays on standby.
-2. **Follow the action.** Up to four fronts run at once, with Captain America's Vibranium Shield, Thor's Mjolnir, Iron Man's repulsors & thrusters, Hulk's gamma smash, Spider-Man's webs & leaps, Black Widow's twin batons, Black Panther's twin claws, Doctor Strange's eldritch magic, Scarlet Witch's chaos hexes and Doctor Doom's arcane bolts. Nick Fury remains unarmed on tactical support.
+1. **Build a matchup.** Choose **Avengers**, **Doomsday**, **Fantastic 4**, **Thunderbolts** or **X-Men**, or pick **Custom** and select 2–8 fighters from the full 41-character cast. Selection order defines pairs; an odd fighter stays on standby.
+2. **Follow the action.** Up to four fronts run at once, with signature weapons and powers across the full cast — shields, Mjolnir, repulsors, Ten Rings, twin katanas, Pym discs, elastic strikes, psionic force fields, flames, clobberin' shockwaves, bionic arms, solar flares, psychic waves, magnetism, optic blasts, kinetic cards, BAMF blades, Talokan tridents, eldritch & chaos magic, and Doctor Doom's arcane bolts. Nick Fury remains unarmed on tactical support.
 3. **Tune the conversation.** Click a fighter to hear that front; click again to return to squad comms. Use **Next line** to advance or **Replay** to restart the conversation. Current and previous lines appear in separate speech bubbles with speaker portraits and Avengers training banter.
 4. **Set the pace.** Choose **0.5× / 1× / 2×**, **Pause / Resume**, or **Motion: reduced** to keep comms without moving or pulsing effects. Close with **Close** or Escape.
 
@@ -141,7 +169,7 @@ Expanded battles keep their source space's cockpit, even when another space is a
 <summary>See the Arena</summary>
 
 <p align="center">
-  <img src="docs/images/arena.svg" alt="Illustrated Battle Simulator with the Doomsday preset: Iron Man and Doctor Doom, Doctor Strange and Scarlet Witch, and Thor and Loki on three training fronts" width="840">
+  <img src="docs/images/arena.svg" alt="Illustrated Battle Simulator with the Doomsday cast: Mister Fantastic and Doctor Doom, Cyclops and Magneto, and Yelena and Bucky Barnes on three training fronts" width="840">
   <br>
   <sub>Illustration built from the project artwork. Not a screenshot.</sub>
 </p>

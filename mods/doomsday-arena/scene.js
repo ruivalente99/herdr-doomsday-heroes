@@ -62,11 +62,11 @@ function fire(id, hero, x, target, y, options, t) {
   const still = options.paused || options.reducedMotion;
   const direction = target > x ? "right" : "left";
   const distance = Math.abs(target - x);
-  const color = weapon === "doom-blast" ? t.done
-    : weapon === "mind-beam" ? t.working
+  const color = weapon === "doom-blast" || weapon === "wing-blade" ? t.done
+    : weapon === "mind-beam" || weapon === "pistol" || weapon === "pym-disc" ? t.working
     : weapon === "web" ? t.foreground
-    : weapon === "arrow" ? t.blocked : t.accent;
-  const period = weapon === "doom-magic" ? 1800 : 1180;
+    : weapon === "arrow" || weapon === "optic-blast" || weapon === "flame" ? t.blocked : t.accent;
+  const period = weapon === "doom-magic" || weapon === "solar-flare" ? 1800 : 1180;
   if (ARCANE_WEAPONS.has(weapon)) {
     const asset = `${weapon}-${direction}`;
     return motion(image(`${SPRITES}/weapons/${asset}.svg`).id(id).absolute()

@@ -133,17 +133,17 @@ def build_arena():
     SYMBOLS.clear()
     t = dark_theme()
     image = base64.b64encode((ROOT / "backgrounds/ships/eclipse/arrowhawk.png").read_bytes()).decode()
-    fronts = [("01 / ARCANE / MYSTIC", "ironman", "doom", "repulsor-right", "doom-magic-left", "Iron Man", "Doctor Doom"),
-              ("02 / ARCANE / MYSTIC", "strange", "wanda", "eldritch-right", "chaos-left", "Dr. Strange", "Scarlet Witch"),
-              ("03 / MELEE DUEL", "thor", "loki", "mjolnir-right", "scepter-left", "Thor", "Loki")]
+    fronts = [("01 / ARCANE / MYSTIC", "mrfantastic", "doom", "elastic-right", "doom-magic-left", "Mr. Fantastic", "Doctor Doom"),
+              ("02 / ARCANE / MYSTIC", "cyclops", "magneto", "optic-blast-right", "magnetism-left", "Cyclops", "Magneto"),
+              ("03 / MELEE DUEL", "yelena", "bucky", "baton-right", "metal-arm-left", "Yelena", "Bucky Barnes")]
     body = [rect(0, 0, 840, 470, t["background"], 16),
             text(28, 46, "Doomsday Heroes · Battle Simulator", t["foreground"], 22, 700, 'font-family="Trebuchet MS, Verdana, sans-serif"'),
-            text(28, 70, "Illustrated Avengers training session · no real agent actions", t["muted"], 12),
+            text(28, 70, "Illustrated Avengers: Doomsday training session · no real agent actions", t["muted"], 12),
             text(812, 46, "ILLUSTRATION", t["done"], 11, 600, 'text-anchor="end" letter-spacing="1"')]
-    for i, preset in enumerate(["Avengers", "Doomsday", "Strike team", "Council", "Custom"]):
-        x = 28 + i * 82
-        body += [rect(x, 88, 74, 26, t["surface"], 6, t["accent"] if preset == "Doomsday" else t["border"]),
-                 text(x + 37, 105, preset, t["accent"] if preset == "Doomsday" else t["foreground"], 12, 500, 'text-anchor="middle"')]
+    for i, preset in enumerate(["Avengers", "Doomsday", "Fantastic 4", "Thunderbolts", "X-Men", "Custom"]):
+        x = 28 + i * 102
+        body += [rect(x, 88, 94, 26, t["surface"], 6, t["accent"] if preset == "Doomsday" else t["border"]),
+                 text(x + 47, 105, preset, t["accent"] if preset == "Doomsday" else t["foreground"], 11, 500, 'text-anchor="middle"')]
     for i, (label, a, b, wa, wb, na, nb) in enumerate(fronts):
         x = 28 + i * 266
         clip = f"front-{i}"
@@ -160,7 +160,7 @@ def build_arena():
                  text(x + 184, 324, nb, t["foreground"], 13, 500, 'text-anchor="middle"')]
     body += [sprite("doom", 28, 388, 44), rect(84, 382, 728, 56, t["popover"], 10, t["border"]),
              text(102, 404, "Doctor Doom · Squad", t["accent"], 11, 600),
-             text(102, 426, "A tin suit against Latveria's sovereign? How quaint.", t["foreground"], 14)]
+             text(102, 426, "Richards! Your calculations fail before Doom's intellect.", t["foreground"], 14)]
     ARENA.write_text(page(840, 470, "Doomsday Heroes Battle Simulator — illustration",
                           "Illustrated Battle Simulator with three Avengers training fronts, using the project's pixel-art characters and weapons. Not a screenshot.", body), encoding="utf-8")
     print(f"Built {ARENA.relative_to(ROOT)}")

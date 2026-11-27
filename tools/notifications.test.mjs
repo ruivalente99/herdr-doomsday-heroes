@@ -109,6 +109,24 @@ test("character-aware background alerts keep their attribution and use the Herdr
   });
   view.render({});
   assert(state.nodes.some(node => node.asset === "mods/doomsday-agents/sprites/doomsday/cap.svg"));
+
+  for (const [hero, expected] of [
+    ["deadpool", "Deadpool finished — maximum effort!"],
+    ["mrfantastic", "Mister Fantastic solved the final variable"],
+    ["magneto", "Magneto bent every obstacle to his will"],
+    ["yelena", "Yelena Belova wrapped the op without a scratch"],
+    ["namor", "Namor delivered victory from the deep"],
+  ]) {
+    const run = fixture({
+      cast: { a1: hero },
+      payload: { title: "pi finished", body: "Done", action: { name: "agent.focus", args: { terminal: "a1" } } },
+    });
+    run.view.init();
+    await flush();
+    assert.equal(run.state.executions[0].args[1], expected);
+    run.view.render({});
+    assert(run.state.nodes.some(node => node.asset === `mods/doomsday-agents/sprites/doomsday/${hero}.svg`));
+  }
 });
 
 test("macOS optional banner images remain separate command arguments", async () => {

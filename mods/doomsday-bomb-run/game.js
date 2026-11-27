@@ -15,6 +15,11 @@ const SPAWNS = [
 const HOSTILES = [
   "doombot", "doom", "loki", "wanda", "hulk", "panther", "hawkeye",
   "thor", "ironman", "cap", "spiderman", "strange", "widow", "vision", "fury",
+  "sam", "antman", "cassie", "shangchi", "mbaku", "falcon", "peggy", "deadpool",
+  "mrfantastic", "invisiblewoman", "humantorch", "thing",
+  "yelena", "bucky", "usagent", "redguardian", "sentry", "ghost",
+  "professorx", "magneto", "cyclops", "beast", "gambit", "mystique", "nightcrawler",
+  "namor",
 ];
 const RANKS = [
   { xp: 0, title: "Cadet" }, { xp: 200, title: "Scout" }, { xp: 600, title: "Veteran" },

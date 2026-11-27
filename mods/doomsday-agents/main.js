@@ -75,6 +75,11 @@ function icon(p, size, color) {
 const CAST = [
   "ironman", "cap", "thor", "hulk", "widow", "hawkeye", "spiderman",
   "strange", "wanda", "panther", "vision", "loki", "fury", "doombot",
+  "sam", "antman", "cassie", "shangchi", "mbaku", "falcon", "peggy", "deadpool",
+  "mrfantastic", "invisiblewoman", "humantorch", "thing",
+  "yelena", "bucky", "usagent", "redguardian", "sentry", "ghost",
+  "professorx", "magneto", "cyclops", "beast", "gambit", "mystique", "nightcrawler",
+  "namor",
 ];
 const DARK_LORD = "doom";
 const CAST_KEY = "doomsday-agents.cast";
@@ -95,6 +100,32 @@ const HERO_NAMES = {
   loki: "Loki",
   fury: "Nick Fury",
   doombot: "Doombot",
+  sam: "Sam Wilson",
+  antman: "Ant-Man",
+  cassie: "Cassie Lang",
+  shangchi: "Shang-Chi",
+  mbaku: "M'Baku",
+  falcon: "Falcon",
+  peggy: "Peggy Carter",
+  deadpool: "Deadpool",
+  mrfantastic: "Mister Fantastic",
+  invisiblewoman: "Invisible Woman",
+  humantorch: "Human Torch",
+  thing: "The Thing",
+  yelena: "Yelena Belova",
+  bucky: "Winter Soldier",
+  usagent: "U.S. Agent",
+  redguardian: "Red Guardian",
+  sentry: "Sentry",
+  ghost: "Ghost",
+  professorx: "Professor X",
+  magneto: "Magneto",
+  cyclops: "Cyclops",
+  beast: "Beast",
+  gambit: "Gambit",
+  mystique: "Mystique",
+  nightcrawler: "Nightcrawler",
+  namor: "Namor",
 };
 const MOOD = { working: "On mission", idle: "On standby", done: "Mission complete", blocked: "Needs backup" };
 const MINUTE = 60000;

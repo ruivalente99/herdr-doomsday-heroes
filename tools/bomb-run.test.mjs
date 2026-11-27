@@ -109,9 +109,9 @@ test("art is reproducible local pixel geometry, without external images or fonts
   }
 });
 
-test("all fifteen pilots have distinct gait frames in four directions", () => {
+test("all 41 pilots have distinct gait frames in four directions", () => {
   const actors = files("mods/doomsday-bomb-run/art/actors");
-  assert.equal(actors.length, 60);
+  assert.equal(actors.length, 164);
   for (const path of actors) {
     const source = read(path);
     assert.match(source, /viewBox="0 0 96 32"/);
@@ -310,8 +310,15 @@ test("the player's own explosion ends the run", () => {
 });
 
 test("pilot and enemies never repeat named characters, even across crowded waves", () => {
-  const heroes = ["doom", "spiderman", "strange", "ironman", "wanda", "panther", "doombot",
-    "hawkeye", "hulk", "vision", "thor", "loki", "cap", "widow", "fury"];
+  const heroes = [
+    "doom", "spiderman", "strange", "ironman", "wanda", "panther", "doombot",
+    "hawkeye", "hulk", "vision", "thor", "loki", "cap", "widow", "fury",
+    "sam", "antman", "cassie", "shangchi", "mbaku", "falcon", "peggy", "deadpool",
+    "mrfantastic", "invisiblewoman", "humantorch", "thing",
+    "yelena", "bucky", "usagent", "redguardian", "sentry", "ghost",
+    "professorx", "magneto", "cyclops", "beast", "gambit", "mystique", "nightcrawler",
+    "namor",
+  ];
   for (const hero of heroes) {
     for (let level = 1; level <= 20; level++) {
       const cast = [hero, ...enemyRoster(hero, 30, level)];

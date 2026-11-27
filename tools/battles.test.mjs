@@ -211,9 +211,9 @@ test("custom selection handles full, empty and odd rosters without phantom oppon
   assertAssets(fixture.nodes);
 });
 
-test("all fifteen Avengers render; support characters are unarmed and dual-wield weapons render", () => {
+test("all 41 Doomsday heroes render; support characters are unarmed and dual-wield weapons render", () => {
   const heroes = Object.keys(model.HEROES);
-  assert.equal(heroes.length, 15);
+  assert.equal(heroes.length, 41);
   for (let index = 0; index < heroes.length; index += 2) {
     const roster = heroes.slice(index, index + 2);
     if (roster.length === 1) roster.push("cap");
@@ -227,10 +227,25 @@ test("all fifteen Avengers render; support characters are unarmed and dual-wield
   assert.equal(model.HEROES.thor.weapon, "mjolnir");
   assert.equal(model.HEROES.widow.weapon, "baton");
   assert.equal(model.HEROES.panther.weapon, "claw");
-  const dual = arenaFixture({ fighters: ["widow", "panther"] });
+  assert.equal(model.HEROES.deadpool.weapon, "katana");
+  assert.equal(model.HEROES.shangchi.weapon, "ten-rings");
+  assert.equal(model.HEROES.mrfantastic.weapon, "elastic");
+  assert.equal(model.HEROES.cyclops.weapon, "optic-blast");
+  assert.equal(model.HEROES.magneto.weapon, "magnetism");
+  const dual = arenaFixture({ fighters: ["widow", "panther", "deadpool", "shangchi", "yelena", "bucky"] });
   dual.render();
-  assert.equal(dual.nodes.filter(node => node.asset?.endsWith("baton-right.svg")).length, 2);
+  assert.equal(dual.nodes.filter(node => node.asset?.endsWith("baton-right.svg")).length, 4);
   assert.equal(dual.nodes.filter(node => node.asset?.endsWith("claw-left.svg")).length, 2);
+  assert.equal(dual.nodes.filter(node => node.asset?.endsWith("katana-right.svg")).length, 2);
+  assert.equal(dual.nodes.filter(node => node.asset?.endsWith("ten-rings-left.svg")).length, 2);
+  assertAssets(dual.nodes);
+
+  // Verify Custom picker exposes every single hero chip cleanly across wrapped rows.
+  const picker = arenaFixture();
+  picker.render();
+  picker.click("arena-mode-custom");
+  for (const hero of heroes) assert(byId(picker.nodes, `arena-pick-${hero}`), `Missing custom picker chip: ${hero}`);
+  assertAssets(picker.nodes);
 });
 
 test("expanded battles keep the source ship and front clicks focus only their conversation", () => {

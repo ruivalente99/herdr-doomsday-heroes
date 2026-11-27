@@ -30,6 +30,32 @@ const HERO_NAMES = {
   loki: "Loki",
   fury: "Nick Fury",
   doombot: "Doombot",
+  sam: "Sam Wilson",
+  antman: "Ant-Man",
+  cassie: "Cassie Lang",
+  shangchi: "Shang-Chi",
+  mbaku: "M'Baku",
+  falcon: "Falcon",
+  peggy: "Peggy Carter",
+  deadpool: "Deadpool",
+  mrfantastic: "Mister Fantastic",
+  invisiblewoman: "Invisible Woman",
+  humantorch: "Human Torch",
+  thing: "The Thing",
+  yelena: "Yelena Belova",
+  bucky: "Winter Soldier",
+  usagent: "U.S. Agent",
+  redguardian: "Red Guardian",
+  sentry: "Sentry",
+  ghost: "Ghost",
+  professorx: "Professor X",
+  magneto: "Magneto",
+  cyclops: "Cyclops",
+  beast: "Beast",
+  gambit: "Gambit",
+  mystique: "Mystique",
+  nightcrawler: "Nightcrawler",
+  namor: "Namor",
 };
 const HERO_LINES = {
   doom: {
@@ -91,6 +117,110 @@ const HERO_LINES = {
   doombot: {
     done: (name) => `${name} reports: directive complete`,
     blocked: (name) => `${name} lost uplink with Latveria`,
+  },
+  sam: {
+    done: (name) => `${name} landed the mission on your left`,
+    blocked: (name) => `${name} needs air support right now`,
+  },
+  antman: {
+    done: (name) => `${name} finished — and barely shrank anything`,
+    blocked: (name) => `${name} is stuck in the Quantum Realm — needs help`,
+  },
+  cassie: {
+    done: (name) => `${name} nailed the quantum objective`,
+    blocked: (name) => `${name} hit a Pym regulator snag`,
+  },
+  shangchi: {
+    done: (name) => `${name} mastered the mission with the Ten Rings`,
+    blocked: (name) => `${name} needs backup in the ring`,
+  },
+  mbaku: {
+    done: (name) => `${name} claims victory for the Jabari`,
+    blocked: (name) => `${name} calls for worthy reinforcements`,
+  },
+  falcon: {
+    done: (name) => `${name} cleared the airspace`,
+    blocked: (name) => `${name} lost Redwing telemetry — needs backup`,
+  },
+  peggy: {
+    done: (name) => `${name} closed the SSR dossier cleanly`,
+    blocked: (name) => `${name} requires your briefing immediately`,
+  },
+  deadpool: {
+    done: (name) => `${name} finished — maximum effort!`,
+    blocked: (name) => `${name} broke the fourth wall and needs you`,
+  },
+  mrfantastic: {
+    done: (name) => `${name} solved the final variable`,
+    blocked: (name) => `${name} stretched a hypothesis too far — needs input`,
+  },
+  invisiblewoman: {
+    done: (name) => `${name} shielded the team through to completion`,
+    blocked: (name) => `${name} is holding the force field — needs help`,
+  },
+  humantorch: {
+    done: (name) => `${name} blazed through the mission`,
+    blocked: (name) => `${name} needs a cooldown and backup`,
+  },
+  thing: {
+    done: (name) => `${name} clobbered the whole task`,
+    blocked: (name) => `${name} hit a brick wall — needs a hand`,
+  },
+  yelena: {
+    done: (name) => `${name} wrapped the op without a scratch`,
+    blocked: (name) => `${name} needs backup — and more pockets`,
+  },
+  bucky: {
+    done: (name) => `${name} completed the objective`,
+    blocked: (name) => `${name} is pinned down and needs support`,
+  },
+  usagent: {
+    done: (name) => `${name} secured the perimeter`,
+    blocked: (name) => `${name} requests immediate tactical backup`,
+  },
+  redguardian: {
+    done: (name) => `${name} crushed the mission with glory!`,
+    blocked: (name) => `${name} needs comrades on the front line`,
+  },
+  sentry: {
+    done: (name) => `${name} finished in a flash of golden light`,
+    blocked: (name) => `${name} needs grounding before things escalate`,
+  },
+  ghost: {
+    done: (name) => `${name} phased past every obstacle`,
+    blocked: (name) => `${name}'s containment field needs stabilization`,
+  },
+  professorx: {
+    done: (name) => `${name} guided the mission to a peaceful close`,
+    blocked: (name) => `${name} is calling for your focus`,
+  },
+  magneto: {
+    done: (name) => `${name} bent every obstacle to his will`,
+    blocked: (name) => `${name} requires your immediate intervention`,
+  },
+  cyclops: {
+    done: (name) => `${name} executed the plan to the letter`,
+    blocked: (name) => `${name} needs eyes on this sector`,
+  },
+  beast: {
+    done: (name) => `${name} concluded the experiment with stars and garters`,
+    blocked: (name) => `${name} encountered an unforeseen complication`,
+  },
+  gambit: {
+    done: (name) => `${name} played the winning hand`,
+    blocked: (name) => `${name} needs a fresh deal, mon ami`,
+  },
+  mystique: {
+    done: (name) => `${name} slipped out with the objective secured`,
+    blocked: (name) => `${name}'s cover is blown — needs extraction`,
+  },
+  nightcrawler: {
+    done: (name) => `${name} bamfed across the finish line`,
+    blocked: (name) => `${name} needs a clear landing zone`,
+  },
+  namor: {
+    done: (name) => `${name} delivered victory from the deep`,
+    blocked: (name) => `${name} demands counsel on deck`,
   },
 };
 

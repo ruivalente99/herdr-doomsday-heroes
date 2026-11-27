@@ -5,19 +5,44 @@ import { settings, shared, layout } from "herdr";
 const SPRITE_DIR = "mods/doomsday-agents/sprites/doomsday";
 const WEAPON_DIR = `${SPRITE_DIR}/weapons`;
 export const SPRITE_SIZE = 36;
-const MELEE_WEAPONS = new Set(["shield", "mjolnir", "smash", "baton", "claw", "scepter"]);
-const RANGED_WEAPONS = new Set(["repulsor", "arrow", "web", "mind-beam", "doom-blast"]);
+const MELEE_WEAPONS = new Set([
+  "shield", "mjolnir", "smash", "baton", "claw", "scepter",
+  "ten-rings", "jabari-staff", "katana", "elastic", "rock-smash",
+  "metal-arm", "us-shield", "red-shield", "phase-strike", "beast-claw",
+  "bamf-blade", "trident",
+]);
+const RANGED_WEAPONS = new Set([
+  "repulsor", "arrow", "web", "mind-beam", "doom-blast",
+  "pym-disc", "wing-blade", "flame", "optic-blast", "kinetic-card", "pistol",
+]);
+const DUAL_HEROES = new Set(["widow", "panther", "yelena", "deadpool", "shangchi"]);
+const ACROBAT_HEROES = new Set(["spiderman", "nightcrawler", "deadpool", "mystique", "antman", "cassie", "ghost", "gambit"]);
+const FLYER_HEROES = new Set(["ironman", "sam", "falcon", "humantorch", "sentry", "namor"]);
 const WEAPONS = {
   doom: "doom-magic", ironman: "repulsor", cap: "shield", thor: "mjolnir",
   hulk: "smash", widow: "baton", hawkeye: "arrow", spiderman: "web",
   strange: "eldritch", wanda: "chaos", panther: "claw", vision: "mind-beam",
   loki: "scepter", fury: null, doombot: "doom-blast",
+  sam: "shield", antman: "pym-disc", cassie: "pym-disc", shangchi: "ten-rings",
+  mbaku: "jabari-staff", falcon: "wing-blade", peggy: "pistol", deadpool: "katana",
+  mrfantastic: "elastic", invisiblewoman: "force-field", humantorch: "flame", thing: "rock-smash",
+  yelena: "baton", bucky: "metal-arm", usagent: "us-shield", redguardian: "red-shield",
+  sentry: "solar-flare", ghost: "phase-strike",
+  professorx: "psychic", magneto: "magnetism", cyclops: "optic-blast", beast: "beast-claw",
+  gambit: "kinetic-card", mystique: "pistol", nightcrawler: "bamf-blade", namor: "trident",
 };
 const NAMES = {
   doom: "Doctor Doom", ironman: "Iron Man", cap: "Captain America", thor: "Thor",
   hulk: "Hulk", widow: "Black Widow", hawkeye: "Hawkeye", spiderman: "Spider-Man",
   strange: "Doctor Strange", wanda: "Scarlet Witch", panther: "Black Panther",
   vision: "Vision", loki: "Loki", fury: "Nick Fury", doombot: "Doombot",
+  sam: "Sam Wilson", antman: "Ant-Man", cassie: "Cassie Lang", shangchi: "Shang-Chi",
+  mbaku: "M'Baku", falcon: "Falcon", peggy: "Peggy Carter", deadpool: "Deadpool",
+  mrfantastic: "Mister Fantastic", invisiblewoman: "Invisible Woman", humantorch: "Human Torch", thing: "The Thing",
+  yelena: "Yelena Belova", bucky: "Winter Soldier", usagent: "U.S. Agent", redguardian: "Red Guardian",
+  sentry: "Sentry", ghost: "Ghost",
+  professorx: "Professor X", magneto: "Magneto", cyclops: "Cyclops", beast: "Beast",
+  gambit: "Gambit", mystique: "Mystique", nightcrawler: "Nightcrawler", namor: "Namor",
 };
 const SHIPS = new Set(["skyrunner", "arrowhawk", "nightglass", "bastion", "longbow", "dart", "eclipse-barge"]);
 const CONVERSATIONS = [
@@ -35,6 +60,26 @@ const CONVERSATIONS = [
   { pair: ["spiderman", "strange"], lines: [["spiderman", "Oh, we're using our made-up names! I'm Spider-Man."], ["strange", "Focus, Parker. Portal on your left."]] },
   { pair: ["doom", "cap"], lines: [["doom", "Kneel, Captain. Doomsday has already begun."], ["cap", "I can do this all day."]] },
   { pair: ["panther", "widow"], lines: [["widow", "Try to keep up, Your Highness."], ["panther", "I never freeze, Romanoff."]] },
+  { pair: ["doom", "mrfantastic"], lines: [["doom", "Richards! Your equations were flawed from the start."], ["mrfantastic", "Give it up, Victor. Check your boundary conditions."]] },
+  { pair: ["mrfantastic", "invisiblewoman"], lines: [["invisiblewoman", "Reed, eyes off the chalkboard and on the flank."], ["mrfantastic", "Right! Force field at twelve o'clock."]] },
+  { pair: ["humantorch", "thing"], lines: [["humantorch", "Flame on! Try to keep up, rock-head!"], ["thing", "Watch the paint, Matchstick — it's clobberin' time!"]] },
+  { pair: ["professorx", "magneto"], lines: [["magneto", "Still lecturing from the high road, old friend?"], ["professorx", "Only until you stop bending the bulkheads, Erik."]] },
+  { pair: ["cyclops", "gambit"], lines: [["cyclops", "Keep your cards off the console, Remy."], ["gambit", "Relax, mon ami — Gambit never misses the ante."]] },
+  { pair: ["beast", "nightcrawler"], lines: [["beast", "Fascinating teleportation vector, Kurt!"], ["nightcrawler", "Bamf! Just don't ask me to write the math down, Hank."]] },
+  { pair: ["magneto", "mystique"], lines: [["magneto", "Infiltration complete, Raven?"], ["mystique", "They never even saw who opened the airlock."]] },
+  { pair: ["yelena", "redguardian"], lines: [["redguardian", "Look at us! Family back on mission together!"], ["yelena", "Alexei, please stop yelling on open comms."]] },
+  { pair: ["yelena", "bucky"], lines: [["yelena", "Nice arm. Very shiny. Does it have pockets?"], ["bucky", "Focus on the breach, Belova."]] },
+  { pair: ["bucky", "sam"], lines: [["sam", "On your left, Bucky. Don't drop the pace."], ["bucky", "You're never letting that line go, are you?"]] },
+  { pair: ["sam", "falcon"], lines: [["falcon", "Wings locked and Redwing online, Cap!"], ["sam", "Stay tight on my wing, Joaquin."]] },
+  { pair: ["cap", "peggy"], lines: [["peggy", "Late again, Rogers. Still owe me that dance."], ["cap", "Right after we wrap this deployment, Peggy."]] },
+  { pair: ["antman", "cassie"], lines: [["antman", "Stay big — wait, stay small! Just stay safe!"], ["cassie", "Relax, Dad, I've got the Pym discs dialed in."]] },
+  { pair: ["panther", "mbaku"], lines: [["mbaku", "Jabari warriors do not wait for slow builds!"], ["panther", "Then stop talking and hold the left flank, M'Baku."]] },
+  { pair: ["panther", "namor"], lines: [["namor", "Surface dwellers test my patience again."], ["panther", "Wakanda and Talokan finish the mission first, Namor."]] },
+  { pair: ["usagent", "bucky"], lines: [["usagent", "I can handle point on this run, Barnes."], ["bucky", "Just stay out of my line of fire, Walker."]] },
+  { pair: ["sentry", "ghost"], lines: [["ghost", "Try not to blind the whole deck, Bob."], ["sentry", "Keeping it dialed way down. Promise."]] },
+  { pair: ["deadpool", "gambit"], lines: [["deadpool", "Woo! I'm about to make a name for myself in this terminal!"], ["gambit", "Careful, Wade — dat's my line, chère."]] },
+  { pair: ["deadpool", "doom"], lines: [["deadpool", "Wait — Tony?! Did the budget cover two masks?"], ["doom", "Silence, jester, before Doom vaporizes your fourth wall."]] },
+  { pair: ["shangchi", "thor"], lines: [["shangchi", "Nice hammer. Ever spar against the Ten Rings?"], ["thor", "A worthy challenge! Show me your stance!"]] },
 ];
 
 export function find(node, id) {
@@ -98,11 +143,11 @@ function miniFighter(agent, hero, x, facing, paused, hasTarget, t) {
     const asset = `${weapon}-${facing}`;
     body.child(image(`${WEAPON_DIR}/${asset}.svg`).w(24).h(12).absolute().top(13)
       .left(facing === "right" ? 16 : -12));
-    if (hero === "widow" || hero === "panther") body.child(image(`${WEAPON_DIR}/${asset}.svg`).w(20).h(10)
+    if (DUAL_HEROES.has(hero)) body.child(image(`${WEAPON_DIR}/${asset}.svg`).w(20).h(10)
       .absolute().top(20).left(facing === "right" ? 14 : -6));
   }
   const dx = !active ? 0 : melee ? direction * 5 : direction * -1;
-  const dy = active && hero === "spiderman" ? -5 : active && hero === "ironman" ? -3 : agent.status === "done" ? -2 : 0;
+  const dy = active && ACROBAT_HEROES.has(hero) ? -5 : active && FLYER_HEROES.has(hero) ? -3 : agent.status === "done" ? -2 : 0;
   return div().id(`fight-${agent.address}`).absolute().left(x).top(4).w(28).h(28)
     .tooltip(`${NAMES[hero]} · ${agent.status ?? "working"}`)
     .child(pulse(pulse(body, paused, "left", 0, dx, period), paused, "top", 0, dy, period))

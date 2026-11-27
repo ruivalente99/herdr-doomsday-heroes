@@ -115,9 +115,16 @@ test("all ship backgrounds have both appearances; unknown ships have no path", (
 });
 
 test("character roster has all generated sprites and only Doombots repeat", () => {
-  const heroes = ["ironman", "cap", "thor", "hulk", "widow", "hawkeye", "spiderman", "strange",
-    "wanda", "panther", "vision", "loki", "fury", "doombot", "doom"];
-  assert.equal(heroes.length, 15);
+  const heroes = [
+    "ironman", "cap", "thor", "hulk", "widow", "hawkeye", "spiderman", "strange",
+    "wanda", "panther", "vision", "loki", "fury", "doombot", "doom",
+    "sam", "antman", "cassie", "shangchi", "mbaku", "falcon", "peggy", "deadpool",
+    "mrfantastic", "invisiblewoman", "humantorch", "thing",
+    "yelena", "bucky", "usagent", "redguardian", "sentry", "ghost",
+    "professorx", "magneto", "cyclops", "beast", "gambit", "mystique", "nightcrawler",
+    "namor",
+  ];
+  assert.equal(heroes.length, 41);
   for (const hero of heroes) {
     assert(existsSync(resolve(root, `mods/doomsday-agents/sprites/doomsday/${hero}.svg`)), hero);
   }
@@ -137,7 +144,7 @@ test("character roster has all generated sprites and only Doombots repeat", () =
 test("character artwork preserves the transparent pixel grid and display size", () => {
   const directory = "mods/doomsday-agents/sprites/doomsday";
   const characters = readdirSync(resolve(root, directory)).filter(name => name.endsWith(".svg"));
-  assert.equal(characters.length, 15);
+  assert.equal(characters.length, 41);
   for (const name of characters) {
     const source = read(`${directory}/${name}`);
     assert.match(source, /viewBox="0 0 32 32" width="36" height="36" shape-rendering="crispEdges"/);
@@ -208,6 +215,9 @@ test("mini battles use their own ship and palette, not the active space's backdr
       ["cap", "ironman", "Big man in a suit of armor. Take that off, what are you?"],
       ["thor", "hulk", "Strongest Avenger reporting in."],
       ["widow", "hawkeye", "Just like Budapest all over again."],
+      ["doom", "mrfantastic", "Richards! Your equations were flawed from the start."],
+      ["professorx", "magneto", "Still lecturing from the high road, old friend?"],
+      ["humantorch", "thing", "Flame on! Try to keep up, rock-head!"],
     ]) {
       host.nodes.length = 0;
       battle("other", [{ address: "a" }, { address: "b" }], { a: first, b: second }, nativeTheme(palette));
